@@ -1,0 +1,54 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import HeroSection from "@/components/HeroSection.astro";
+import { heroCandidates } from "@/data/hero-candidates";
+import config from "@/config";
+
+const { site } = config;
+---
+
+<Layout title="Hero preview" description="Compare hero paintings against the current theme.">
+  <Header />
+  <main id="main-content" data-layout="preview">
+    <div class="bg-background border-line/60 border-b px-6 py-8">
+      <div class="app-layout">
+        <h1 class="font-display text-3xl font-medium">Hero preview</h1>
+        <p class="text-muted-foreground mt-3 max-w-2xl text-sm leading-relaxed">
+          Each block uses the same global palette and fade as the home page. Use
+          this to judge whether per-painting color adaptation is worth building.
+          On the home page, paintings rotate once per day (site timezone).
+          Add <code class="text-foreground">?hero=slug</code> to pin one
+          (e.g. <code class="text-foreground">?hero=poppies</code>).
+        </p>
+        <ul class="text-muted-foreground mt-4 flex flex-wrap gap-2 text-sm">
+          {
+            heroCandidates.map(candidate => (
+              <li>
+                <a
+                  href={`/?hero=${candidate.slug}`}
+                  class="text-accent hover:underline"
+                >
+                  {candidate.slug}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    {
+      heroCandidates.map(candidate => (
+        <HeroSection
+          candidate={candidate}
+          title={site.companyName}
+          showCaption
+          minHeight="min-h-[88svh]"
+        />
+      ))
+    }
+  </main>
+  <Footer />
+</Layout>

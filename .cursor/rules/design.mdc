@@ -1,0 +1,34 @@
+---
+description: Art direction and visual guardrails for the landing page. The aesthetic IS the product.
+alwaysApply: true
+---
+
+# Design Guardrails
+
+The whole point is that this site does **not** look like a template or an AI-generated page. Quiet, nostalgic, painterly — like opening a well-made hardcover, or a New England forest in low light. Calm and considered.
+
+## Anchors (do not drift from these)
+
+- **Hero:** one full-bleed public-domain painting or landscape. The art does the emotional work; type and layout stay disciplined around it. Artist/era is not fixed: evaluate candidates against the global palette before adding per-image color adaptation.
+- **Grain:** a fine, ever-present canvas/paper grain across the whole site (fixed, `pointer-events-none`, low opacity). This single trick sells "painterly" over "flat digital." Never remove it.
+- **Palette:** forest green / brown / blue tuned to feel painterly and native to landscape art. Use the CSS tokens in `src/styles/theme.css` — never hardcode hex in components. The off-white is cooled toward green (`#E8EAE0`), NOT warm cream. Per-hero palette adaptation is optional; compare candidates at `/hero-preview` first.
+- **Type:** Display = Cormorant Garamond (refined bookish serif). Body = Literata (reading column ~65–72ch). Dates in quiet body text — not mono eyebrows. Generous line-height in prose.
+- **Motion:** restrained. Gentle hero fade/parallax on load; soft scroll-reveal on the writings list. Nothing more. Always respect `prefers-reduced-motion`.
+- **Spend boldness in one place** (hero + grain). Everything else stays quiet. Before shipping a section, remove one decorative element.
+
+## NEVER produce these AI tells
+
+- The 3 default AI looks: (a) warm cream + high-contrast serif (Playfair) + terracotta; (b) near-black + single acid-green/vermilion accent; (c) broadsheet hairline layout, zero radius, dense newspaper columns.
+- Purple/indigo/violet gradients; gradient **text**; glassmorphism.
+- Big-number-tiny-label hero; `01 / 02 / 03` section numbering when content is not a sequence.
+- Centered-everything; identical evenly-spaced icon+heading+two-lines feature cards.
+- Untouched default component-library look (default shadcn/Tailwind UI spacing & shadows); lucide icons as decoration.
+- Emoji as bullets or section markers.
+- Generic startup copy ("Empower your workflow", "Supercharge…", "in seconds"). Copy is plain, human, specific, from the reader's side. Leave clearly-marked `[PLACEHOLDER]` rather than inventing slick filler.
+- **Em-dashes (—)** in copy, especially descriptions and card previews. Reads as AI punctuation; use a comma, colon, or split into two sentences.
+- **ALL CAPS + wide letter-spacing section labels** (mono "eyebrows" like `LATEST WRITINGS`, `tracking-[0.14em] uppercase`). Reads as AI/template. Use sentence-case serif headings or quiet body links instead.
+- Heavy drop shadows, excessive border-radius, scroll animations on every element.
+
+## Process
+
+After each visual section: run the dev server, screenshot it, and self-critique against this list before moving on.

@@ -1,0 +1,27 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = { external?: boolean } & HTMLAttributes<"a">;
+
+const { external = true, class: className, ...attrs } = Astro.props;
+const rel = external ? "noopener noreferrer" : undefined;
+const target = external ? "_blank" : undefined;
+---
+
+<a
+  {target}
+  {rel}
+  class:list={[
+    "group border-moss/50 hover:border-accent font-display inline-flex items-baseline gap-2 border-b pb-1 text-lg transition-colors",
+    className,
+  ]}
+  {...attrs}
+>
+  <slot />
+  <span
+    aria-hidden="true"
+    class="text-accent transition-transform group-hover:translate-x-1"
+  >
+    &rarr;
+  </span>
+</a>

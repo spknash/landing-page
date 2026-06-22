@@ -1,0 +1,46 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Main from "@/components/Main.astro";
+import LinkButton from "@/components/LinkButton.astro";
+import IconArrowLeft from "@/assets/icons/IconArrowLeft.svg";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+const { site } = config;
+---
+
+<Layout
+  title={`${t.pages.missionTitle} | ${config.site.title}`}
+  description={t.pages.missionDesc}
+>
+  <Header />
+
+  <div aria-hidden="true" class="h-0"></div>
+
+  <LinkButton
+    href={getRelativeLocaleUrl(locale, "")}
+    class="focus-outline hover:text-foreground/75 fixed top-14 left-4 z-40 text-sm sm:left-6"
+  >
+    <IconArrowLeft class="inline-block size-4 rtl:rotate-180" aria-hidden="true" />
+    <span>{t.nav.home}</span>
+  </LinkButton>
+
+  <Main pageTitle={t.pages.missionTitle}>
+    <div
+      class="font-body text-foreground max-w-[42rem] text-[1.0625rem] leading-[1.8] sm:text-[1.125rem]"
+    >
+      {
+        site.mission.map(paragraph => (
+          <p class="my-5 first:mt-0 last:mb-0">{paragraph}</p>
+        ))
+      }
+    </div>
+  </Main>
+
+  <Footer />
+</Layout>

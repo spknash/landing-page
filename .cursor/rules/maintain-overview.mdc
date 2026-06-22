@@ -1,0 +1,27 @@
+---
+description: Keep PROJECT_OVERVIEW.md current as the project's living source of truth.
+alwaysApply: true
+---
+
+# Maintain the Project Overview
+
+`PROJECT_OVERVIEW.md` (repo root) is the living source of truth for this project. Keep it accurate as the project evolves — treat it as part of the work, not an afterthought.
+
+## When to update it
+
+Update `PROJECT_OVERVIEW.md` in the **same change** whenever you:
+
+- Add, remove, or rename a page/route, top-level component, or primitive.
+- Change the stack, build/deploy setup, or key config (`astro-paper.config.ts`, `astro.config.ts`, design tokens).
+- Change the content model, social links, or the "current bet" / product outlink.
+- Complete or re-scope a build milestone.
+- Make a decision worth remembering (record it under Decisions with a one-line rationale).
+
+## How to update it
+
+- Edit the relevant section in place; keep it concise and skimmable. Don't let it rot into stale prose.
+- Reflect what the code **actually** does now — not aspirations. If something is planned but not built, mark it clearly (e.g. `(planned)` / `[ ]`).
+- Keep the "Current status" / milestone checklist honest after each chunk of work.
+- Don't duplicate the rules files; link to them instead. The rules enforce *how* to build; the overview records *what exists and why*.
+
+If a requested change makes the overview out of date and you did not update it, you are not done.

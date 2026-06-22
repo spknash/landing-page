@@ -1,0 +1,41 @@
+---
+description: Stack, architecture, and scope conventions for the company landing page.
+alwaysApply: true
+---
+
+# Project Conventions
+
+A small, **thesis-first** umbrella site for the company — separate from any single product. It survives product pivots. It does exactly three things:
+
+1. States the mission / thesis.
+2. Houses our long-form writings.
+3. Points to the current product (today: Fluxx at https://fluxx.sh; Linus next).
+
+**Non-goals (do not add):** pricing, feature grids, product screenshots, lead-capture funnels, dashboards. Keep the surface area tiny. Nav is 3 items max.
+
+## Stack
+
+- **Astro** (v6) + **Tailwind CSS v4** + TypeScript.
+- Built on the **AstroPaper** theme, used as an **engine, not a look**: routing, content collections, Pagefind search, RSS, sitemap, OG images. Restyle everything visible (see `design.mdc`).
+- Content = Markdown/MDX via Astro content collections.
+
+## Layout & routes
+
+```
+/                 Home — hero painting, latest-writings teaser
+/mission          Mission / thesis (`site.mission` in astro-paper.config.ts)
+/writings         Index of all posts (AstroPaper "posts" collection, surfaced as "writings")
+/writings/[slug]  Individual post (the reading experience — keep it beautiful)
+```
+
+- Nav: **Mission** + **Writings** + **Get Fluxx** (outlink to https://fluxx.sh). No About page.
+
+- Posts live in `src/content/posts/`. The content collection is still named `posts` internally; URLs are `/writings/...`. Post URLs are generated in `src/utils/getPostPaths.ts`.
+- Design tokens live in `src/styles/theme.css`; global utilities in `src/styles/global.css`; prose in `src/styles/typography.css`.
+- Site / social / feature config: `astro-paper.config.ts` (`site.companyName` for hero + footer). Fonts: the `fonts` array in `astro.config.ts`.
+
+## Workflow
+
+- `npm run dev` to develop; `npm run build` to verify (runs `astro check` + Pagefind).
+- Prefer editing tokens/primitives over one-off styles. Never hardcode palette hex in components — use the CSS variables / Tailwind tokens.
+- Keep JS minimal; Astro ships ~zero JS by default and we want to keep it that way.

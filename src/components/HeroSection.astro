@@ -1,0 +1,165 @@
+---
+import { getImage, Image } from "astro:assets";
+import {
+  heroCandidates,
+  heroRotationSlugs,
+  type HeroCandidate,
+} from "@/data/hero-candidates";
+import { getHeroSlugForDate } from "@/utils/getHeroSlugForDate";
+
+type Props = {
+  candidate?: HeroCandidate;
+  rotateDaily?: boolean;
+  timeZone?: string;
+  title: string;
+  minHeight?: string;
+  showCaption?: boolean;
+};
+
+const {
+  candidate,
+  rotateDaily = false,
+  timeZone = "UTC",
+  title,
+  minHeight = "min-h-svh",
+  showCaption = false,
+} = Astro.props;
+
+type HeroImagePayload = {
+  slug: string;
+  src: string;
+  srcset: string;
+};
+
+async function buildImagePayload(
+  hero: HeroCandidate
+): Promise<HeroImagePayload> {
+  const optimized = await getImage({
+    src: hero.src,
+    widths: [640, 1024, 1600, 2200],
+    format: "webp",
+  });
+
+  return {
+    slug: hero.slug,
+    src: optimized.src,
+    srcset: optimized.attributes.srcset ?? "",
+  };
+}
+
+const rotationPayload = rotateDaily
+  ? await Promise.all(heroCandidates.map(buildImagePayload))
+  : undefined;
+
+const activeCandidate =
+  candidate ??
+  heroCandidates.find(
+    c =>
+      c.slug ===
+      getHeroSlugForDate(new Date(), timeZone, heroRotationSlugs)
+  ) ??
+  heroCandidates[0]!;
+
+const activePayload = rotationPayload?.find(
+  entry => entry.slug === activeCandidate.slug
+);
+---
+
+<section
+  class:list={[
+    "relative isolate flex w-full items-start justify-center pt-[8vh] sm:pt-[12vh]",
+    minHeight,
+  ]}
+  data-hero-rotate={rotateDaily || undefined}
+>
+  {
+    rotateDaily && rotationPayload ? (
+      <>
+        <noscript>
+          <style is:inline>
+            [data-hero-rotate] [data-hero-painting] {
+              opacity: 1 !important;
+            }
+          </style>
+        </noscript>
+        <img
+          data-hero-painting
+          alt=""
+          width={activeCandidate.src.width}
+          height={activeCandidate.src.height}
+          src={activePayload?.src}
+          srcset={activePayload?.srcset || undefined}
+          sizes="100vw"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          class="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+        />
+        <script
+          is:inline
+          define:vars={{ rotationPayload, timeZone, heroRotationSlugs }}
+        >
+          (function () {
+            function dateKey(date, tz) {
+              return new Intl.DateTimeFormat("en-CA", {
+                timeZone: tz,
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              }).format(date);
+            }
+            function slugForDate(date, tz, slugs) {
+              const key = dateKey(date, tz);
+              let hash = 0;
+              for (let i = 0; i < key.length; i++) {
+                hash = (hash * 31 + key.charCodeAt(i)) >>> 0;
+              }
+              return slugs[hash % slugs.length];
+            }
+            const slug = slugForDate(
+              new Date(),
+              timeZone,
+              heroRotationSlugs
+            );
+            const entry = rotationPayload.find(function (item) {
+              return item.slug === slug;
+            });
+            const img = document.querySelector("[data-hero-painting]");
+            if (!entry || !img) return;
+            if (img.getAttribute("src") !== entry.src) {
+              img.setAttribute("src", entry.src);
+              if (entry.srcset) img.setAttribute("srcset", entry.srcset);
+            }
+          })();
+        </script>
+      </>
+    ) : (
+      <Image
+        src={activeCandidate.src}
+        alt=""
+        widths={[640, 1024, 1600, 2200]}
+        sizes="100vw"
+        loading="eager"
+        fetchpriority="high"
+        class="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+      />
+    )
+  }
+
+  <div class="hero-fade" aria-hidden="true"></div>
+
+  <div class="relative z-10 px-6 text-center">
+    <h1 class="hero-title font-display text-4xl font-medium tracking-tight sm:text-5xl">
+      {title}
+    </h1>
+    {
+      showCaption && (
+        <p class="text-muted-foreground mt-4 max-w-xl text-sm">
+          {activeCandidate.artist}
+          {activeCandidate.year ? `, ${activeCandidate.year}` : ""}.{" "}
+          <em>{activeCandidate.title}</em>
+        </p>
+      )
+    }
+  </div>
+</section>

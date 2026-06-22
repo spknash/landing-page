@@ -1,0 +1,36 @@
+---
+description: How to author and port writings (markdown content collection).
+globs: src/content/**
+alwaysApply: false
+---
+
+# Writings / Content
+
+**Canonical content lives on this site.** Posts are markdown/MDX in `src/content/posts/`. We own the URL, SEO, and the on-brand reading experience. Substack is **distribution only**: after publishing here, cross-post to Substack with a `canonicalURL` pointing back to this site.
+
+## Frontmatter (required unless noted)
+
+```yaml
+---
+title: "Plain, specific, human"
+description: "One honest sentence; used for SEO + cards."
+pubDatetime: 2024-03-12T00:00:00Z   # preserve the ORIGINAL publish date
+modDatetime:                         # optional, on real edits
+tags: ["essays"]                     # default ["others"]; lowercase
+featured: false                      # optional; surfaces on home
+draft: false                         # optional; hidden in prod when true
+canonicalURL:                        # set when cross-posted elsewhere
+---
+```
+
+## Porting existing writings
+
+- **Substack:** use Substack export → convert HTML to markdown (pandoc or `turndown`) → drop into `src/content/posts/` → fix frontmatter. Substack RSS HTML is fiddly; clean it.
+- **X articles:** no clean export — paste text and clean to markdown by hand.
+- Always **preserve original publish dates** so the archive timeline stays honest.
+
+## Voice
+
+Plain, human, specific, written from the reader's side. No jargon, no startup filler. If unsure of exact wording, leave a clearly-marked `[PLACEHOLDER]` for hand-editing rather than inventing slick copy.
+
+**No em-dashes (—)** in titles, descriptions, or body copy. They read as AI punctuation. Use a comma, colon, or a second sentence instead. (En-dashes for number ranges like `15–20` are fine.)

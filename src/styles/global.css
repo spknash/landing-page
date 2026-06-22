@@ -1,0 +1,141 @@
+@import "tailwindcss";
+/* Self-hosted variable fonts (no render-blocking Google <link>) */
+@import "@fontsource-variable/literata";
+@import "@fontsource-variable/literata/wght-italic.css";
+@import "@fontsource-variable/cormorant-garamond";
+@import "@fontsource-variable/cormorant-garamond/wght-italic.css";
+@import "@fontsource-variable/jetbrains-mono";
+@import "./theme.css";
+@import "./typography.css";
+@import "rehype-callouts/theme/obsidian";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@layer base {
+  * {
+    @apply border-border outline-accent/75;
+    scrollbar-width: auto;
+    scrollbar-color: var(--muted) transparent;
+  }
+  a,
+  button {
+    @apply outline-accent outline-offset-1 focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  body {
+    font-feature-settings: "liga" 1, "calt" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* Canvas/paper grain — the single trick that sells "painterly".
+   One fixed, pointer-events-none layer over the whole page. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='180'%20height='180'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.82'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'/%3E%3C/svg%3E");
+}
+[data-theme="dark"] .grain {
+  mix-blend-mode: screen;
+  opacity: 0.06;
+}
+
+/* Liquid glass nav — very low fill, heavy blur. Avoid bg-background/N
+   (reads milky); tint with white/black at single-digit opacity instead. */
+.glass-nav {
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, var(--ink) 7%, transparent);
+  background: color-mix(in srgb, white 9%, transparent);
+  backdrop-filter: blur(28px) saturate(1.65);
+  -webkit-backdrop-filter: blur(28px) saturate(1.65);
+  box-shadow: 0 1px 0 color-mix(in srgb, white 22%, transparent) inset;
+}
+[data-theme="dark"] .glass-nav {
+  border-color: color-mix(in srgb, white 9%, transparent);
+  background: color-mix(in srgb, black 22%, transparent);
+  box-shadow: 0 1px 0 color-mix(in srgb, white 6%, transparent) inset;
+}
+
+.glass-nav-link {
+  @apply text-foreground/80 hover:text-foreground rounded-full px-4 py-1.5 transition-colors;
+}
+.glass-nav-link.active-nav {
+  @apply text-foreground;
+}
+
+.glass-nav-cta {
+  @apply bg-bark text-surface inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 font-medium transition-colors;
+}
+.glass-nav-cta:hover {
+  background: var(--forest);
+  color: var(--accent-foreground);
+}
+
+/* Hero title: soft mat glow only — no backdrop; may fade slightly on dark passages. */
+.hero-title {
+  color: var(--ink);
+  text-shadow: 0 2px 28px color-mix(in srgb, var(--bg) 38%, transparent);
+}
+
+/* Hero → content: extended bottom gradient (painting into mat). */
+.hero-fade {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 42%,
+    color-mix(in srgb, var(--bg) 18%, transparent) 68%,
+    color-mix(in srgb, var(--bg) 72%, transparent) 86%,
+    var(--bg) 100%
+  );
+}
+
+/* Fixed header offset on interior pages; home hero stays full-bleed. */
+header + * {
+  padding-top: 5.5rem;
+}
+header + main[data-layout="index"] {
+  padding-top: 0;
+}
+
+@utility max-w-app {
+  @apply max-w-2xl;
+}
+
+@utility app-layout {
+  @apply max-w-app mx-auto w-full px-6;
+}
+
+@utility active-nav {
+  @apply text-foreground underline decoration-dotted decoration-1 underline-offset-[6px];
+}
+
+/* Mono eyebrow: uppercase, letter-spaced utility label */
+@utility eyebrow {
+  @apply font-mono text-xs tracking-[0.18em] uppercase;
+  color: var(--muted);
+}
+
+:target {
+  scroll-margin-block: 5rem;
+}

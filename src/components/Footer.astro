@@ -1,0 +1,44 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import IconRss from "@/assets/icons/IconRss.svg";
+import Socials from "./Socials.astro";
+import config from "@/config";
+import { getAssetPath } from "@/utils/withBase";
+
+type Props = {
+  noMarginTop?: boolean;
+} & HTMLAttributes<"footer">;
+
+const { noMarginTop = false, class: className, ...attrs } = Astro.props;
+
+const currentYear = new Date().getFullYear();
+const rssHref = getAssetPath("rss.xml");
+---
+
+<footer
+  class:list={["app-layout", { "mt-auto": !noMarginTop }, className]}
+  {...attrs}
+>
+  <div
+    class="border-line/70 text-muted-foreground flex flex-col items-center justify-between gap-4 border-t py-8 sm:flex-row-reverse"
+  >
+    <div class="flex items-center gap-1">
+      <Socials />
+      <a
+        href={rssHref}
+        data-astro-reload
+        class="group p-2 hover:rotate-6 sm:p-1"
+        title="RSS Feed"
+        aria-label="RSS Feed"
+      >
+        <IconRss
+          class="hover:stroke-accent inline-block size-6 scale-125 stroke-current stroke-2 opacity-90 sm:scale-110"
+        />
+        <span class="sr-only">RSS Feed</span>
+      </a>
+    </div>
+    <div class="font-mono text-xs tracking-wide">
+      &#169; {currentYear} {config.site.companyName}
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,68 @@
+/* Register design tokens for Tailwind v4.
+   Palette tuned for painterly landscape art — NOT picked off a color wheel. */
+@theme inline {
+  /* AstroPaper-engine token aliases (used throughout the theme machinery) */
+  --color-background: var(--bg);
+  --color-foreground: var(--ink);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--surface);
+  --color-muted-foreground: var(--muted);
+  --color-border: var(--line);
+
+  /* Painterly palette, exposed for direct use */
+  --color-surface: var(--surface);
+  --color-forest: var(--forest);
+  --color-moss: var(--moss);
+  --color-bark: var(--bark);
+  --color-tan: var(--tan);
+  --color-dusk: var(--dusk);
+  --color-sky: var(--sky);
+  --color-gold: var(--gold);
+
+  /* Type families */
+  --font-display: "Cormorant Garamond Variable", Georgia, serif;
+  --font-body: "Literata Variable", Georgia, serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+  --font-app: var(--font-body);
+}
+
+/* Light theme — cool linen, faint green-grey (NOT warm cream) */
+:root,
+[data-theme="light"] {
+  --bg: #e8eae0;
+  --surface: #f1f2ea;
+  --ink: #1e241c;
+  --muted: #5a6353;
+  --forest: #294636;
+  --moss: #5e7553;
+  --bark: #6e5038;
+  --tan: #b0905f;
+  --dusk: #3b5a6b;
+  --sky: #9db7c2;
+  --gold: #9a7b3f;
+  --line: #cbcfc0;
+
+  --accent: var(--forest);
+  --accent-foreground: #f1f2ea;
+}
+
+/* Dark theme — nocturne */
+[data-theme="dark"] {
+  --bg: #14201b;
+  --surface: #1b2823;
+  --ink: #e6e8dd;
+  --muted: #9aa694;
+  --forest: #6f8a76;
+  --moss: #8aa07e;
+  --bark: #a98a64;
+  --tan: #c9ab7e;
+  --dusk: #6d93a6;
+  --sky: #9db7c2;
+  --gold: #c8a960;
+  --line: #2c3a32;
+
+  /* --sky for links, muted gold for emphasis */
+  --accent: var(--sky);
+  --accent-foreground: #14201b;
+}

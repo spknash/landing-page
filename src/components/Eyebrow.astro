@@ -1,0 +1,11 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"span">;
+
+const { class: className, ...attrs } = Astro.props;
+---
+
+<span class:list={["eyebrow", className]} {...attrs}>
+  <slot />
+</span>
