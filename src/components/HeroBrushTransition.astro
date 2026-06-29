@@ -1,0 +1,49 @@
+---
+import {
+  HERO_BRUSH_VIEWBOX,
+  heroMatBrushPaths,
+  heroPaintBrushMask,
+} from "@/data/hero-brush-strokes";
+
+type Props = {
+  imageSrc: string;
+};
+
+const { imageSrc } = Astro.props;
+---
+
+<div class="hero-brush-transition" aria-hidden="true">
+  <div
+    class="hero-brush-transition__paint"
+    data-hero-brush-paint
+    style={`--hero-brush-mask: ${heroPaintBrushMask}; background-image: url("${imageSrc}");`}
+  >
+  </div>
+
+  <svg
+    class="hero-brush-transition__mat"
+    viewBox={HERO_BRUSH_VIEWBOX}
+    preserveAspectRatio="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <filter id="hero-brush-soften" x="-8%" y="-8%" width="116%" height="116%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" />
+      </filter>
+    </defs>
+    <g filter="url(#hero-brush-soften)">
+      {
+        heroMatBrushPaths.map(path => (
+          <path d={path} class="hero-brush-transition__mat-stroke" />
+        ))
+      }
+    </g>
+    <rect
+      x="0"
+      y="252"
+      width="1440"
+      height="68"
+      class="hero-brush-transition__mat-fill"
+    />
+  </svg>
+</div>

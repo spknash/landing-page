@@ -94,20 +94,55 @@
   text-shadow: 0 2px 28px color-mix(in srgb, var(--bg) 38%, transparent);
 }
 
-/* Hero → content: extended bottom gradient (painting into mat). */
-.hero-fade {
+/* Hero → content: brush-stroke dissolve (painting into mat). */
+.hero-brush-transition {
   pointer-events: none;
   position: absolute;
   inset: 0;
   z-index: -10;
-  background: linear-gradient(
+  overflow: hidden;
+}
+
+.hero-brush-transition__paint {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(0.35px);
+  opacity: 0.94;
+  -webkit-mask-image: var(--hero-brush-mask);
+  mask-image: var(--hero-brush-mask);
+  -webkit-mask-size: 100% 44%;
+  mask-size: 100% 44%;
+  -webkit-mask-position: bottom;
+  mask-position: bottom;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.hero-brush-transition__mat {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 44%;
+}
+
+.hero-brush-transition__mat-stroke,
+.hero-brush-transition__mat-fill {
+  fill: var(--bg);
+}
+
+/* Soft cutoff so the full painting does not compete under the mat strokes. */
+.hero-painting,
+[data-hero-painting] {
+  -webkit-mask-image: linear-gradient(
     to bottom,
-    transparent 0%,
-    transparent 42%,
-    color-mix(in srgb, var(--bg) 18%, transparent) 68%,
-    color-mix(in srgb, var(--bg) 72%, transparent) 86%,
-    var(--bg) 100%
+    #000 0%,
+    #000 50%,
+    transparent 86%
   );
+  mask-image: linear-gradient(to bottom, #000 0%, #000 50%, transparent 86%);
 }
 
 /* Fixed header offset on interior pages; home hero stays full-bleed. */

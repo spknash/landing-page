@@ -58,7 +58,7 @@ Quiet, nostalgic, painterly — see `.cursor/rules/design.mdc` for the enforced 
 
 - **Hero:** one full-bleed public-domain painting with only the **centered company name** over it. The home hero **rotates daily** through `heroRotationSlugs` in `src/data/hero-candidates.ts` (site timezone). Override with `?hero=slug` or compare all at `/hero-preview`.
 - **Header:** a centered **liquid-glass pill** (near-transparent fill + heavy blur) with Writings + a **Get Fluxx** CTA (bark/forest accent).
-- **Hero → content:** an extended **atmospheric bottom fade** — the painting dissolves into the page background, like a mat around a framed print (no hard edge or decorative divider).
+- **Hero → content:** a **brush-stroke dissolve** at the bottom of the painting — strokes sampled from the hero image blend into the page background (no hard edge or decorative divider).
 - **Home links:** removed; mission is in the nav pill only.
 - **Theme:** light only for now (cream background, dark ink text). Dark palette remains in CSS if we re-enable it later.
 - **Grain:** ever-present fine canvas/paper grain overlay across the whole site.

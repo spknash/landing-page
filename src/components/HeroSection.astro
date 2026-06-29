@@ -5,6 +5,7 @@ import {
   heroRotationSlugs,
   type HeroCandidate,
 } from "@/data/hero-candidates";
+import HeroBrushTransition from "@/components/HeroBrushTransition.astro";
 import { getHeroSlugForDate } from "@/utils/getHeroSlugForDate";
 
 type Props = {
@@ -63,6 +64,16 @@ const activeCandidate =
 const activePayload = rotationPayload?.find(
   entry => entry.slug === activeCandidate.slug
 );
+
+const brushImageSrc =
+  activePayload?.src ??
+  (
+    await getImage({
+      src: activeCandidate.src,
+      width: 1600,
+      format: "webp",
+    })
+  ).src;
 ---
 
 <section
@@ -93,7 +104,7 @@ const activePayload = rotationPayload?.find(
           loading="eager"
           fetchpriority="high"
           decoding="async"
-          class="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+          class="hero-painting absolute inset-0 -z-20 h-full w-full object-cover object-center"
         />
         <script
           is:inline
@@ -130,6 +141,12 @@ const activePayload = rotationPayload?.find(
               img.setAttribute("src", entry.src);
               if (entry.srcset) img.setAttribute("srcset", entry.srcset);
             }
+            const brushPaint = document.querySelector(
+              "[data-hero-brush-paint]"
+            );
+            if (brushPaint) {
+              brushPaint.style.backgroundImage = 'url("' + entry.src + '")';
+            }
           })();
         </script>
       </>
@@ -141,12 +158,12 @@ const activePayload = rotationPayload?.find(
         sizes="100vw"
         loading="eager"
         fetchpriority="high"
-        class="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+        class="hero-painting absolute inset-0 -z-20 h-full w-full object-cover object-center"
       />
     )
   }
 
-  <div class="hero-fade" aria-hidden="true"></div>
+  <HeroBrushTransition imageSrc={brushImageSrc} />
 
   <div class="relative z-10 px-6 text-center">
     <h1 class="hero-title font-display text-4xl font-medium tracking-tight sm:text-5xl">
