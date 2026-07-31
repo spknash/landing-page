@@ -27,7 +27,9 @@
   }
 
   body {
-    font-feature-settings: "liga" 1, "calt" 1;
+    font-feature-settings:
+      "liga" 1,
+      "calt" 1;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
   }
@@ -88,25 +90,36 @@
   color: var(--accent-foreground);
 }
 
-/* Hero title: soft mat glow only — no backdrop; may fade slightly on dark passages. */
+/* Hero title: layered mat glow, no backdrop panel. Stacked radii keep the name
+   legible over dark passages (Leutze's flag canton) without reading as a box. */
 .hero-title {
   color: var(--ink);
-  text-shadow: 0 2px 28px color-mix(in srgb, var(--bg) 38%, transparent);
+  text-shadow:
+    0 0 16px color-mix(in srgb, var(--bg) 88%, transparent),
+    0 0 34px color-mix(in srgb, var(--bg) 76%, transparent),
+    0 2px 56px color-mix(in srgb, var(--bg) 58%, transparent);
 }
 
-/* Hero → content: extended bottom gradient (painting into mat). */
+/* Hero → content: a plain vertical fade into the mat.
+   Height is a share of the hero, not the viewport: the section is sized by the
+   painting's aspect ratio, so a vh-based height can overrun it entirely.
+   Stops are eased rather than a bare two-stop ramp, which otherwise reads as a
+   hard band across the middle. */
 .hero-fade {
   pointer-events: none;
   position: absolute;
-  inset: 0;
+  inset-inline: 0;
+  bottom: 0;
   z-index: -10;
+  height: 45%;
   background: linear-gradient(
     to bottom,
-    transparent 0%,
-    transparent 42%,
-    color-mix(in srgb, var(--bg) 18%, transparent) 68%,
-    color-mix(in srgb, var(--bg) 72%, transparent) 86%,
-    var(--bg) 100%
+    color-mix(in srgb, var(--bg) 0%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 10%, transparent) 28%,
+    color-mix(in srgb, var(--bg) 30%, transparent) 48%,
+    color-mix(in srgb, var(--bg) 58%, transparent) 66%,
+    color-mix(in srgb, var(--bg) 84%, transparent) 82%,
+    var(--bg) 96%
   );
 }
 

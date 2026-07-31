@@ -8,7 +8,7 @@ A small, **thesis-first** umbrella site for the company — separate from any si
 
 1. **States the mission / thesis** — what we believe and the bet we're making now.
 2. **Houses our writings** — an ownable home for long-form pieces (currently scattered across X and Substack).
-3. **Points to the current product** — an outlink to whatever we're actively shipping (today: **Fluxx**, https://fluxx.sh; **Linus** next).
+3. **Points to the current product** — an outlink to whatever we're actively shipping (today: **Jungle**, https://jungleagents.com).
 
 Deliberately minimal and artistic, not a generic SaaS landing page. The aesthetic is the differentiator.
 
@@ -43,7 +43,7 @@ AstroPaper provides routing, content collections, search, RSS, and sitemap. Its 
 /writings/[slug]  Individual post
 ```
 
-- Nav: **Mission** + **Writings** + **Get Fluxx** (→ https://fluxx.sh).
+- Nav: **Mission** + **Writings** + **Try Jungle** (→ https://jungleagents.com).
 
 - Posts: `src/content/posts/` (collection still named `posts` internally; public URLs are `/writings/...`).
 - Post URL generation: `src/utils/getPostPaths.ts`.
@@ -56,9 +56,9 @@ AstroPaper provides routing, content collections, search, RSS, and sitemap. Its 
 
 Quiet, nostalgic, painterly — see `.cursor/rules/design.mdc` for the enforced version.
 
-- **Hero:** one full-bleed public-domain painting with only the **centered company name** over it. The home hero **rotates daily** through `heroRotationSlugs` in `src/data/hero-candidates.ts` (site timezone). Override with `?hero=slug` or compare all at `/hero-preview`.
-- **Header:** a centered **liquid-glass pill** (near-transparent fill + heavy blur) with Writings + a **Get Fluxx** CTA (bark/forest accent).
-- **Hero → content:** an extended **atmospheric bottom fade** — the painting dissolves into the page background, like a mat around a framed print (no hard edge or decorative divider).
+- **Hero:** one full-bleed public-domain painting with only the **centered company name** over it. Currently **pinned** to Leutze's _Washington Crossing the Delaware_ via `pinnedHeroSlug` in `src/data/hero-candidates.ts`. Set that back to `null` to resume the daily rotation through `heroRotationSlugs` (site timezone). Override with `?hero=slug` or compare all at `/hero-preview`.
+- **Header:** a centered **liquid-glass pill** (near-transparent fill + heavy blur) with Writings + a **Try Jungle** CTA (bark/forest accent).
+- **Hero → content:** a **plain vertical fade** into the mat (`.hero-fade` in `global.css`), sized as a share of the hero rather than in `vh`. Two painterly attempts were tried and rejected: layered scalloped SVG strokes (read as a cheap "wave divider") and a `feTurbulence`-displaced dry-brush edge (still an uneven line). **Any treatment with a visible irregular edge is off the table** — the even gradient is the decision.
 - **Home links:** removed; mission is in the nav pill only.
 - **Theme:** light only for now (cream background, dark ink text). Dark palette remains in CSS if we re-enable it later.
 - **Grain:** ever-present fine canvas/paper grain overlay across the whole site.
@@ -68,20 +68,29 @@ Quiet, nostalgic, painterly — see `.cursor/rules/design.mdc` for the enforced 
 
 ## Content model
 
-- **Canonical = this site.** Distribution = Substack (cross-post with a `canonicalURL` back here).
+- **Write on Substack; this site mirrors it.** Both publications are pulled into `src/content/posts/` as full-text markdown:
+  - Suhaas — `suhaaspk.substack.com`
+  - Sahil — `sahilmahendrakar.substack.com`
+- `npm run sync:substack` (`scripts/sync-substack.mjs`) fetches both RSS feeds, converts the post HTML to markdown, archives images into `src/assets/writings/<slug>/`, rewrites cross-post links to local `/writings/` URLs, records the comment count, and prettier-formats its output. `--dry-run` previews.
+- Sources, skipped slugs, and per-slug frontmatter overrides: `scripts/substack-sources.mjs`.
+- `.github/workflows/sync-substack.yml` runs the sync daily at 09:20 UTC, builds to verify, and commits any change (which Vercel then deploys).
+- A post carrying `substackUrl` is **owned by the sync** — hand edits are overwritten on the next run. Edit on Substack instead.
+- **Comments live on Substack.** It has no embeddable comments widget, so `SubstackDiscuss.astro` deep-links to `{substackUrl}/comments` at the end of each mirrored post.
+- **No canonical tags** pointing either way; search engines pick between the mirror and Substack.
+- Posts carry an `author` (`Suhaas` / `Sahil`), shown as a byline on `/writings` cards and post pages.
 - Preserve original publish dates when porting. See `.cursor/rules/content.mdc`.
 
 ## Decisions
 
 - **Astro over Next.js** — content + marketing site, not an app; ships ~zero JS, content is first-class, RSS/sitemap/image optimization built in.
 - **AstroPaper as engine, not look** — keep the content/routing/search/RSS machinery; restyle everything visible.
-- **Canonical-here content model** — own the URL/SEO; Substack is distribution only.
+- **Substack-first, mirrored here** — replaces the original canonical-here model. Writing and commenting stay where the subscribers are; the site keeps a full-text mirror so we own the reading experience and the archive. Files rather than a live fetch, so Pagefind can index the posts, the build never depends on Substack being up, and the writing has git history on our own domain. No canonical tags either way (decided 2026-07-30).
 - **`/writings` route** — AstroPaper's `posts` collection is surfaced at `/writings` (collection name kept internally to minimize churn).
 - **Self-hosted fonts (Fontsource)** — instead of Astro's Google font provider, so the build works without network and avoids render-blocking `<link>`s.
 - **Static OG image** — disabled AstroPaper's satori/dynamic OG (off-brand template, depended on the removed Google font config). `public/default-og.jpg` is generated from the hero painting. A bespoke per-post OG is a future option.
 - **Vite pinned to 7** — `overrides.vite: ^7` in `package.json`; npm otherwise pulls Vite 8, which Astro 6 doesn't support.
 - **Trimmed nav + features** — archives/tags removed from nav; share links trimmed to X + email, to keep the surface tiny.
-- **Minimal home + chrome** — hero is only the centered company name; thesis lives on `/mission`; header is a centered liquid-glass pill (Writings + Get Fluxx only); search icon, theme toggle, and mobile hamburger removed; load/scroll animations removed.
+- **Minimal home + chrome** — hero is only the centered company name; thesis lives on `/mission`; header is a centered liquid-glass pill (Writings + Try Jungle only); search icon, theme toggle, and mobile hamburger removed; load/scroll animations removed.
 
 ## Current status
 
@@ -92,17 +101,18 @@ Build milestones (from the brief):
 - [x] Config: site metadata, social links (X ×2, Substack), `/writings` route, RSS
 - [x] Token layer: palette, self-hosted fonts, grain overlay
 - [x] Strip AstroPaper default styling, apply art direction
-- [x] Home page: hero + latest-writings teaser (Mission + Get Fluxx in nav)
+- [x] Home page: hero + latest-writings teaser (Mission + Try Jungle in nav)
 - [x] Mission page (`/mission`)
 - [x] Writings: index + post reading layout
-- [x] About page removed; product outlink lives in nav as **Get Fluxx**
+- [x] About page removed; product outlink lives in nav as **Try Jungle**
 - [x] Replace placeholder company name (`companyName` in `astro-paper.config.ts`)
 - [x] Port first three Substack writings (Fluxx, Software Factories, Soft Pivot)
+- [x] Mirror both Substacks (7 posts), daily sync workflow, Substack comment CTA
 - [ ] Final polish + quality floor (§9: Lighthouse, reduced-motion audit), deploy to Vercel
 
-Hero candidates in `src/data/hero-candidates.ts`. Default/fallback: **Childe Hassam, _Poppies, Isles of Shoals_ (1891)**. Home rotates daily across all four bundled paintings (timezone: `site.timezone` in config).
+Hero candidates in `src/data/hero-candidates.ts`. Home is **pinned** to **Emanuel Leutze, _Washington Crossing the Delaware_ (1851)** via `pinnedHeroSlug`; `defaultHeroSlug` (Hassam's _Poppies_) remains the fallback, and the daily rotation across all four bundled paintings resumes if the pin is cleared.
 
 ## Open questions / placeholders
 
-- Company name: `site.companyName` in `astro-paper.config.ts` (currently **Fluxx**).
 - Production domain: **sahilandsuhaas.com** (`site.url` in `astro-paper.config.ts`).
+- `public/default-og.jpg` was generated from the old Hassam hero, so link previews still show poppies and the old wordmark. Regenerate from the Leutze painting.

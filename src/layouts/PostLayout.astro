@@ -9,12 +9,20 @@ type Props = {
   canonicalURL?: string;
   pubDatetime?: Date;
   modDatetime?: Date | null;
+  author?: string;
 };
 
 const { site } = config;
 
-const { title, description, ogImage, canonicalURL, pubDatetime, modDatetime } =
-  Astro.props;
+const {
+  title,
+  description,
+  ogImage,
+  canonicalURL,
+  pubDatetime,
+  modDatetime,
+  author,
+} = Astro.props;
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -26,7 +34,7 @@ const structuredData = {
   author: [
     {
       "@type": "Person",
-      name: site.author,
+      name: author ?? site.author,
       ...(site.profile && { url: site.profile }),
     },
   ],

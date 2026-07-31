@@ -21,6 +21,13 @@ const posts = defineCollection({
       canonicalURL: z.string().optional(),
       hideEditPost: z.boolean().optional(),
       timezone: z.string().optional(),
+      /**
+       * Set by `scripts/sync-substack.mjs` on mirrored posts. Its presence marks
+       * a post as owned by the sync, and drives the "discuss on Substack" CTA.
+       */
+      substackUrl: z.string().optional(),
+      /** Comment count at last sync; only used to colour the CTA copy. */
+      substackComments: z.number().int().optional(),
     }),
 });
 

@@ -5,6 +5,7 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Datetime from "@/components/Datetime.astro";
 import Tag from "@/components/Tag.astro";
+import SubstackDiscuss from "@/components/SubstackDiscuss.astro";
 import { getPostSlug, getPostUrl } from "@/utils/getPostPaths";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { slugifyStr } from "@/utils/slugify";
@@ -68,6 +69,7 @@ const nextPost: AdjacentPost =
 
 const {
   title,
+  author,
   ogImage: initOgImage,
   canonicalURL,
   pubDatetime,
@@ -75,6 +77,8 @@ const {
   timezone,
   tags,
   hideEditPost,
+  substackUrl,
+  substackComments,
 } = post.data;
 
 const preview = getPostPreview(post);
@@ -109,6 +113,7 @@ const ogImage = ogImageUrl
   canonicalURL={canonicalURL}
   pubDatetime={pubDatetime}
   modDatetime={modDatetime}
+  author={author}
 >
   <Header />
 
@@ -128,6 +133,8 @@ const ogImage = ogImageUrl
 
     <div class="my-2 flex items-center gap-2">
       <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
+      <span aria-hidden="true" class="text-muted-foreground">|</span>
+      <span class="text-muted-foreground text-sm sm:text-base">{author}</span>
       <span
         aria-hidden="true"
         class:list={[
@@ -162,6 +169,16 @@ const ogImage = ogImageUrl
     </ul>
 
     <ShareLinks />
+
+    {
+      substackUrl && (
+        <SubstackDiscuss
+          {substackUrl}
+          comments={substackComments}
+          class="mt-8"
+        />
+      )
+    }
 
     <hr class="my-8 border-dashed" />
 

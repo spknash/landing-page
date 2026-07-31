@@ -3,7 +3,7 @@ import { defineAstroPaperConfig } from "./src/types/config";
 export default defineAstroPaperConfig({
   site: {
     url: "https://sahilandsuhaas.com/",
-    companyName: "Fluxx",
+    companyName: "Jungle",
     mission: [
       "Humans have always had a natural drive to make things. For most of history, almost no one got to build what they truly believed in. Most of our time and energy went towards earning a living, leaving little or no time remaining for the things we actually want to build.",
       "AI presents the opportunity to change this. The capability is already here; but the killer interface still hasn't arrived yet. A very small percent of the world is leveraging this new technology.",

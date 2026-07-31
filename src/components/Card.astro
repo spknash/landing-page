@@ -11,17 +11,18 @@ type Props = {
 
 const { variant: Heading = "h2", id, data, filePath, body } = Astro.props;
 
-const { title, ...props } = data;
+const { title, author, ...props } = data;
 const preview = getPostPreview({ data, body });
 const href = getPostUrl(id, filePath, Astro.currentLocale);
 ---
 
 <li class="group py-6">
   <a href={href} class="block focus-visible:outline-none">
-    <Datetime
-      {...props}
-      class="text-muted-foreground mb-2 text-sm [&_svg]:hidden"
-    />
+    <div class="text-muted-foreground mb-2 flex items-center gap-2 text-sm">
+      <Datetime {...props} class="text-sm [&_svg]:hidden" />
+      <span aria-hidden="true">·</span>
+      <span>{author}</span>
+    </div>
     <Heading
       transition:name={toTransitionName(title)}
       class="font-display group-hover:text-accent text-xl leading-snug font-medium decoration-1 underline-offset-4 transition-colors group-hover:underline sm:text-2xl"
