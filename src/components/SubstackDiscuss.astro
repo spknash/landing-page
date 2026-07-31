@@ -1,0 +1,54 @@
+---
+/**
+ * Substack has no embeddable comments widget — only a subscribe embed — so the
+ * conversation stays where the subscribers already are. This deep-links into
+ * the post's comment section rather than pretending to host it here.
+ */
+import IconSubstack from "@/assets/icons/socials/substack.svg";
+
+type Props = {
+  substackUrl: string;
+  /** Count at last sync; deliberately rendered as "3 comments so far". */
+  comments?: number;
+  class?: string;
+};
+
+const { substackUrl, comments, class: className } = Astro.props;
+
+const href = `${substackUrl.replace(/\/+$/, "")}/comments`;
+const label =
+  comments === undefined || comments === 0
+    ? "No comments yet."
+    : `${comments} comment${comments === 1 ? "" : "s"} so far.`;
+---
+
+<aside
+  class:list={[
+    "border-moss/30 bg-surface/40 rounded-sm border p-5 sm:p-6",
+    className,
+  ]}
+  data-pagefind-ignore
+>
+  <p class="text-muted-foreground text-sm leading-relaxed">
+    {label} The conversation lives on Substack, where this was first published.
+  </p>
+
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="group border-moss/50 hover:border-accent font-display mt-3 inline-flex items-baseline gap-2 border-b pb-1 text-lg transition-colors"
+  >
+    <IconSubstack
+      class="inline-block size-4 self-center fill-transparent stroke-current stroke-2"
+      aria-hidden="true"
+    />
+    <span>Discuss on Substack</span>
+    <span
+      aria-hidden="true"
+      class="text-accent transition-transform group-hover:translate-x-1"
+    >
+      &rarr;
+    </span>
+  </a>
+</aside>

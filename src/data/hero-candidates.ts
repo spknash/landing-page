@@ -53,7 +53,7 @@ export const heroCandidates: HeroCandidate[] = [
 export const defaultHeroSlug = "poppies";
 
 /** Pin the home hero (skips daily rotation). Set to `null` to rotate again. */
-export const pinnedHeroSlug: string | null = null;
+export const pinnedHeroSlug: string | null = "washington-delaware";
 
 /** Home hero rotation pool (one painting per calendar day, site timezone). */
 export const heroRotationSlugs = heroCandidates.map(candidate => candidate.slug);

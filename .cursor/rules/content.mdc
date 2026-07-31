@@ -6,7 +6,17 @@ alwaysApply: false
 
 # Writings / Content
 
-**Canonical content lives on this site.** Posts are markdown/MDX in `src/content/posts/`. We own the URL, SEO, and the on-brand reading experience. Substack is **distribution only**: after publishing here, cross-post to Substack with a `canonicalURL` pointing back to this site.
+**Write on Substack; this site mirrors it.** Substack is where posts are drafted, published, and commented on. `src/content/posts/` holds a full-text mirror so we own an on-brand reading experience, a searchable archive, and a home that survives Substack. Neither side sets a `canonicalURL`; search engines pick.
+
+Do **not** hand-edit a mirrored post (any file with `substackUrl` in its frontmatter) — the next sync overwrites it. Fix the text on Substack and re-run the sync.
+
+## Syncing
+
+```bash
+npm run sync:substack        # add --dry-run to preview
+```
+
+`scripts/sync-substack.mjs` pulls both publications' RSS feeds, converts the post HTML to markdown, archives images into `src/assets/writings/<slug>/`, rewrites cross-post links to local `/writings/` URLs, and prettier-formats what it writes. `.github/workflows/sync-substack.yml` runs it daily. Publications, skipped slugs, and per-slug frontmatter overrides live in `scripts/substack-sources.mjs`.
 
 ## Frontmatter (required unless noted)
 
@@ -19,18 +29,21 @@ modDatetime:                         # optional, on real edits
 tags: ["essays"]                     # default ["others"]; lowercase
 featured: false                      # optional; surfaces on home
 draft: false                         # optional; hidden in prod when true
-canonicalURL:                        # set when cross-posted elsewhere
+author: "Suhaas"                     # byline; "Suhaas" or "Sahil"
+substackUrl:                         # set by the sync; marks a mirrored post
+substackComments:                    # set by the sync; count at last run
+canonicalURL:                        # unused for mirrored posts
 ---
 ```
 
-## Porting existing writings
+## Hand-authored posts
 
-- **Substack:** use Substack export → convert HTML to markdown (pandoc or `turndown`) → drop into `src/content/posts/` → fix frontmatter. Substack RSS HTML is fiddly; clean it.
-- **X articles:** no clean export — paste text and clean to markdown by hand.
-- Always **preserve original publish dates** so the archive timeline stays honest.
+Anything written here rather than on Substack (no `substackUrl`) is left alone by the sync. Always **preserve original publish dates** so the archive timeline stays honest.
 
 ## Voice
 
 Plain, human, specific, written from the reader's side. No jargon, no startup filler. If unsure of exact wording, leave a clearly-marked `[PLACEHOLDER]` for hand-editing rather than inventing slick copy.
 
 **No em-dashes (—)** in titles, descriptions, or body copy. They read as AI punctuation. Use a comma, colon, or a second sentence instead. (En-dashes for number ranges like `15–20` are fine.)
+
+This applies to copy we write. Mirrored post bodies are reproduced verbatim from Substack, punctuation included.

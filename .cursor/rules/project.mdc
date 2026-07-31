@@ -9,7 +9,7 @@ A small, **thesis-first** umbrella site for the company — separate from any si
 
 1. States the mission / thesis.
 2. Houses our long-form writings.
-3. Points to the current product (today: Fluxx at https://fluxx.sh; Linus next).
+3. Points to the current product (today: Jungle at https://jungleagents.com).
 
 **Non-goals (do not add):** pricing, feature grids, product screenshots, lead-capture funnels, dashboards. Keep the surface area tiny. Nav is 3 items max.
 
@@ -28,7 +28,7 @@ A small, **thesis-first** umbrella site for the company — separate from any si
 /writings/[slug]  Individual post (the reading experience — keep it beautiful)
 ```
 
-- Nav: **Mission** + **Writings** + **Get Fluxx** (outlink to https://fluxx.sh). No About page.
+- Nav: **Mission** + **Writings** + **Try Jungle** (outlink to https://jungleagents.com). No About page.
 
 - Posts live in `src/content/posts/`. The content collection is still named `posts` internally; URLs are `/writings/...`. Post URLs are generated in `src/utils/getPostPaths.ts`.
 - Design tokens live in `src/styles/theme.css`; global utilities in `src/styles/global.css`; prose in `src/styles/typography.css`.

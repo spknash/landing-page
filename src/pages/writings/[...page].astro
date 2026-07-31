@@ -34,7 +34,10 @@ const t = useTranslations(locale);
     href={getRelativeLocaleUrl(locale, "")}
     class="focus-outline hover:text-foreground/75 fixed top-14 left-4 z-40 text-sm sm:left-6"
   >
-    <IconArrowLeft class="inline-block size-4 rtl:rotate-180" aria-hidden="true" />
+    <IconArrowLeft
+      class="inline-block size-4 rtl:rotate-180"
+      aria-hidden="true"
+    />
     <span>{t.nav.home}</span>
   </LinkButton>
 
