@@ -63,6 +63,7 @@ Quiet, nostalgic, painterly — see `.cursor/rules/design.mdc` for the enforced 
 - **Header:** a centered **liquid-glass pill** (near-transparent fill + heavy blur) with Mission, Writings and Newsletters.
 - **Hero → content:** a **plain vertical fade** into the mat (`.hero-fade` in `global.css`), sized as a share of the hero rather than in `vh`. Two painterly attempts were tried and rejected: layered scalloped SVG strokes (read as a cheap "wave divider") and a `feTurbulence`-displaced dry-brush edge (still an uneven line). **Any treatment with a visible irregular edge is off the table** — the even gradient is the decision.
 - **Home links:** removed; mission is in the nav pill only.
+- **Newsletters:** a plain blog post that reads like a letter. Warm paper ground (`#F7F4EE`, swapped in via `html:has(.newsletter-page)`), Newsreader for everything, italic subheads, full-width images, no ornament. Each issue has a single author. Chosen 2026-10-05 over busier scrapbook/tabloid/retro and structured journal/soft-color directions; the ask was "calm, mostly text with images, like a normal blog".
 - **Theme:** light only for now (cream background, dark ink text). Dark palette remains in CSS if we re-enable it later.
 - **Grain:** ever-present fine canvas/paper grain overlay across the whole site.
 - **Palette:** forest green / brown / blue, cooled off-white (`#E8EAE0`, not warm cream).
@@ -109,7 +110,7 @@ Build milestones (from the brief):
 - [x] Writings: index + post reading layout
 - [x] About page removed
 - [x] Jungle branding and outlink removed; site is now **Sahil & Suhaas**, home for the weekly newsletter (2026-10-05)
-- [x] Newsletters collection + `/newsletters` index (plain issue layout; bespoke newsletter look still being chosen)
+- [x] Newsletters collection + `/newsletters` index + letter-style issue page
 - [x] Replace placeholder company name (`companyName` in `astro-paper.config.ts`)
 - [x] Port first three Substack writings (Fluxx, Software Factories, Soft Pivot)
 - [x] Mirror both Substacks (7 posts), daily sync workflow, Substack comment CTA
