@@ -12,7 +12,7 @@ heroCreditUrl: "https://www.spacex.com/launches/starship-flight-14"
 
 Hi everyone, welcome to our newsletter! We're planning to write about what we've been up to every week so you all can stay updated on what's been going on in our lives.
 
-This is the start of the first week that Suhaas and I are working full-time on our startup, Cerebellum. (September 30 was my last day at Amazon.) Here's a quick list of things we've done recently:
+This is the start of the first week that Suhaas and I are working full-time on our startup. Here's a quick list of things we've done recently:
 
 - Created a landing page for Cerebellum: [usecerebellum.com](https://usecerebellum.com)
 - Wrote a [whitepaper](https://www.usecerebellum.com/whitepaper/) on what we're building
