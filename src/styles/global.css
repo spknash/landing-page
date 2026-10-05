@@ -222,7 +222,8 @@ html:has(.newsletter-page) {
     margin-top: 0.35em;
   }
 
-  & img {
+  & img,
+  & video {
     display: block;
     width: auto;
     max-width: 100%;
@@ -234,6 +235,7 @@ html:has(.newsletter-page) {
   }
 
   & p:has(> img:only-child),
+  & video,
   & figure {
     margin-block: 2em;
   }
