@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { Image, getImage } from "astro:assets";
 import PostLayout from "@/layouts/PostLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
@@ -20,8 +21,19 @@ export async function getStaticPaths() {
 }
 
 const { issue } = Astro.props;
-const { title, issue: number, pubDatetime, description, author } = issue.data;
+const {
+  title,
+  issue: number,
+  pubDatetime,
+  description,
+  author,
+  heroImage,
+  heroAlt,
+} = issue.data;
 const { Content } = await render(issue);
+
+const ogImage = (await getImage({ src: heroImage, width: 1200, format: "jpg" }))
+  .src;
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -34,6 +46,7 @@ const t = useTranslations(locale);
 <PostLayout
   title={`${title} | ${config.site.title}`}
   description={description}
+  ogImage={ogImage}
   pubDatetime={pubDatetime}
   author={author}
 >
@@ -56,6 +69,16 @@ const t = useTranslations(locale);
       {title}
     </h1>
     <p class="text-muted-foreground mt-4 text-base">By {author}</p>
+
+    <Image
+      src={heroImage}
+      alt={heroAlt}
+      widths={[640, 960, 1280]}
+      sizes="(min-width: 40rem) 40rem, 100vw"
+      loading="eager"
+      fetchpriority="high"
+      class="mt-10 aspect-[3/2] w-full rounded object-cover"
+    />
 
     <article class="newsletter-prose mt-10">
       <Content />

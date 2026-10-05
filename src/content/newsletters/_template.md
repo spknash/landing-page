@@ -6,6 +6,9 @@ issue: 1
 pubDatetime: 2026-10-05T12:00:00-04:00
 description: "One line teaser for the index and link previews."
 author: "Sahil"
+# Required. Keep it next to the issue's other images.
+heroImage: "../../assets/newsletters/issue-NNN/headline.jpg"
+heroAlt: "What the headline image shows"
 draft: true
 ---
 

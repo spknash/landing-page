@@ -4,6 +4,8 @@ issue: 1
 pubDatetime: 2026-10-05T09:00:00-04:00
 description: "Placeholder teaser."
 author: "Sahil"
+heroImage: "../../assets/images/hero-twachtman-spring.jpg"
+heroAlt: "Placeholder headline image"
 ---
 
 Placeholder intro. A couple of sentences about how the week went, written the way you'd tell a friend over dinner.

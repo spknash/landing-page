@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { Image } from "astro:assets";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
@@ -60,6 +61,13 @@ const issues = getSortedNewsletters(await getCollection("newsletters"));
                 href={getRelativeLocaleUrl(locale, `newsletters/${id}`)}
                 class="block focus-visible:outline-none"
               >
+                <Image
+                  src={data.heroImage}
+                  alt={data.heroAlt}
+                  widths={[640, 960, 1280]}
+                  sizes="(min-width: 42rem) 42rem, 100vw"
+                  class="mb-4 aspect-[3/2] w-full rounded object-cover transition-opacity group-hover:opacity-90"
+                />
                 <p class="text-muted-foreground mb-1 text-sm italic">
                   No. {data.issue} · {data.author} ·{" "}
                   {dayjs(data.pubDatetime)

@@ -53,7 +53,9 @@ const newsletters = defineCollection({
       pubDatetime: z.date(),
       description: z.string().optional(),
       author: z.string().default(config.site.author),
-      ogImage: image().or(z.string()).optional(),
+      /** Headline image shown above the title, on the index, and in link previews. */
+      heroImage: image(),
+      heroAlt: z.string().default(""),
       draft: z.boolean().optional(),
     }),
 });
