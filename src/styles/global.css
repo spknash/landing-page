@@ -63,17 +63,23 @@
 
 /* Liquid glass nav — very low fill, heavy blur. Avoid bg-background/N
    (reads milky); tint with white/black at single-digit opacity instead. */
+/* Frosted, so text scrolling underneath blurs out instead of colliding with the
+   links. The blur goes through Tailwind's utilities: written by hand next to
+   its -webkit- twin, the minifier kept only the prefixed property, so Chrome
+   and Firefox rendered no blur at all. The page-colored tint keeps the links
+   legible even where backdrop-filter is unsupported. */
 .glass-nav {
+  @apply backdrop-blur-xl backdrop-saturate-150;
   border-radius: 9999px;
   border: 1px solid color-mix(in srgb, var(--ink) 7%, transparent);
-  background: color-mix(in srgb, white 9%, transparent);
-  backdrop-filter: blur(28px) saturate(1.65);
-  -webkit-backdrop-filter: blur(28px) saturate(1.65);
-  box-shadow: 0 1px 0 color-mix(in srgb, white 22%, transparent) inset;
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 22%, transparent) inset,
+    0 4px 16px -8px color-mix(in srgb, var(--ink) 18%, transparent);
 }
 [data-theme="dark"] .glass-nav {
   border-color: color-mix(in srgb, white 9%, transparent);
-  background: color-mix(in srgb, black 22%, transparent);
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
   box-shadow: 0 1px 0 color-mix(in srgb, white 6%, transparent) inset;
 }
 
