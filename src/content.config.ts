@@ -56,6 +56,9 @@ const newsletters = defineCollection({
       /** Headline image shown above the title, on the index, and in link previews. */
       heroImage: image(),
       heroAlt: z.string().default(""),
+      /** Optional photo credit shown under the headline image. */
+      heroCredit: z.string().optional(),
+      heroCreditUrl: z.string().url().optional(),
       draft: z.boolean().optional(),
     }),
 });

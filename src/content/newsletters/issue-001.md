@@ -6,6 +6,8 @@ description: "Our first week working full-time on Cerebellum: a landing page, a 
 author: "Sahil"
 heroImage: "../../assets/newsletters/issue-001/starship.jpg"
 heroAlt: "A Starship rocket lifting off the launch pad in a cloud of orange-lit exhaust"
+heroCredit: "SpaceX, Starship Flight 14"
+heroCreditUrl: "https://www.spacex.com/launches/starship-flight-14"
 ---
 
 Hi everyone, welcome to our newsletter! We're planning to write about what we've been up to every week so you all can stay updated on what's been going on in our lives.

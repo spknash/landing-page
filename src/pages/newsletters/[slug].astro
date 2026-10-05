@@ -29,6 +29,8 @@ const {
   author,
   heroImage,
   heroAlt,
+  heroCredit,
+  heroCreditUrl,
 } = issue.data;
 const { Content } = await render(issue);
 
@@ -70,15 +72,31 @@ const t = useTranslations(locale);
     </h1>
     <p class="text-muted-foreground mt-4 text-base">By {author}</p>
 
-    <Image
-      src={heroImage}
-      alt={heroAlt}
-      widths={[640, 960, 1280]}
-      sizes="(min-width: 40rem) 40rem, 100vw"
-      loading="eager"
-      fetchpriority="high"
-      class="mt-10 aspect-[3/2] w-full rounded object-cover"
-    />
+    <figure class="mt-10">
+      <Image
+        src={heroImage}
+        alt={heroAlt}
+        widths={[640, 960, 1280]}
+        sizes="(min-width: 40rem) 40rem, 100vw"
+        loading="eager"
+        fetchpriority="high"
+        class="aspect-[3/2] w-full rounded object-cover"
+      />
+      {
+        heroCredit && (
+          <figcaption class="text-muted-foreground mt-2 text-right text-xs italic">
+            Photo:{" "}
+            {heroCreditUrl ? (
+              <a href={heroCreditUrl} class="hover:text-foreground underline">
+                {heroCredit}
+              </a>
+            ) : (
+              heroCredit
+            )}
+          </figcaption>
+        )
+      }
+    </figure>
 
     <article class="newsletter-prose mt-10">
       <Content />

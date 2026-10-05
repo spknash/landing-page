@@ -9,6 +9,9 @@ author: "Sahil"
 # Required. Keep it next to the issue's other images.
 heroImage: "../../assets/newsletters/issue-NNN/headline.jpg"
 heroAlt: "What the headline image shows"
+# Optional credit line under the headline image.
+# heroCredit: "Photographer or source"
+# heroCreditUrl: "https://..."
 draft: true
 ---
 
