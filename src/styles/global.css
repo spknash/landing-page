@@ -224,8 +224,12 @@ html:has(.newsletter-page) {
 
   & img {
     display: block;
-    width: 100%;
+    width: auto;
+    max-width: 100%;
     height: auto;
+    /* Keep tall phone photos from taking over the screen. */
+    max-height: 80vh;
+    margin-inline: auto;
     border-radius: 4px;
   }
 
