@@ -8,7 +8,7 @@ A small, **thesis-first** umbrella site for the company — separate from any si
 
 1. **States the mission / thesis** — what we believe and the bet we're making now.
 2. **Houses our writings** — an ownable home for long-form pieces (currently scattered across X and Substack).
-3. **Points to the current product** — an outlink to whatever we're actively shipping (today: **Jungle**, https://jungleagents.com).
+3. **Hosts our weekly newsletter** — a fun, creative issue each week on what we've been up to (startup work and everything else).
 
 Deliberately minimal and artistic, not a generic SaaS landing page. The aesthetic is the differentiator.
 
@@ -41,9 +41,12 @@ AstroPaper provides routing, content collections, search, RSS, and sitemap. Its 
 /hero-preview     Stack of hero painting candidates (dev/evaluation)
 /writings         Index of all writings
 /writings/[slug]  Individual post
+/newsletters      Index of newsletter issues (newest first)
+/newsletters/[slug] Individual newsletter issue
 ```
 
-- Nav: **Mission** + **Writings** + **Try Jungle** (→ https://jungleagents.com).
+- Nav: **Mission** + **Writings** + **Newsletters**. No product outlink.
+- Newsletter issues: `src/content/newsletters/` (copy `_template.md`; `issue` number orders the index).
 
 - Posts: `src/content/posts/` (collection still named `posts` internally; public URLs are `/writings/...`).
 - Post URL generation: `src/utils/getPostPaths.ts`.
@@ -57,7 +60,7 @@ AstroPaper provides routing, content collections, search, RSS, and sitemap. Its 
 Quiet, nostalgic, painterly — see `.cursor/rules/design.mdc` for the enforced version.
 
 - **Hero:** one full-bleed public-domain painting with only the **centered company name** over it. Currently **pinned** to Leutze's _Washington Crossing the Delaware_ via `pinnedHeroSlug` in `src/data/hero-candidates.ts`. Set that back to `null` to resume the daily rotation through `heroRotationSlugs` (site timezone). Override with `?hero=slug` or compare all at `/hero-preview`.
-- **Header:** a centered **liquid-glass pill** (near-transparent fill + heavy blur) with Writings + a **Try Jungle** CTA (bark/forest accent).
+- **Header:** a centered **liquid-glass pill** (near-transparent fill + heavy blur) with Mission, Writings and Newsletters.
 - **Hero → content:** a **plain vertical fade** into the mat (`.hero-fade` in `global.css`), sized as a share of the hero rather than in `vh`. Two painterly attempts were tried and rejected: layered scalloped SVG strokes (read as a cheap "wave divider") and a `feTurbulence`-displaced dry-brush edge (still an uneven line). **Any treatment with a visible irregular edge is off the table** — the even gradient is the decision.
 - **Home links:** removed; mission is in the nav pill only.
 - **Theme:** light only for now (cream background, dark ink text). Dark palette remains in CSS if we re-enable it later.
@@ -90,7 +93,7 @@ Quiet, nostalgic, painterly — see `.cursor/rules/design.mdc` for the enforced 
 - **Static OG image** — disabled AstroPaper's satori/dynamic OG (off-brand template, depended on the removed Google font config). `public/default-og.jpg` is generated from the hero painting. A bespoke per-post OG is a future option.
 - **Vite pinned to 7** — `overrides.vite: ^7` in `package.json`; npm otherwise pulls Vite 8, which Astro 6 doesn't support.
 - **Trimmed nav + features** — archives/tags removed from nav; share links trimmed to X + email, to keep the surface tiny.
-- **Minimal home + chrome** — hero is only the centered company name; thesis lives on `/mission`; header is a centered liquid-glass pill (Writings + Try Jungle only); search icon, theme toggle, and mobile hamburger removed; load/scroll animations removed.
+- **Minimal home + chrome** — hero is only the centered company name; thesis lives on `/mission`; header is a centered liquid-glass pill (Mission, Writings, Newsletters); search icon, theme toggle, and mobile hamburger removed; load/scroll animations removed.
 
 ## Current status
 
@@ -101,10 +104,12 @@ Build milestones (from the brief):
 - [x] Config: site metadata, social links (X ×2, Substack), `/writings` route, RSS
 - [x] Token layer: palette, self-hosted fonts, grain overlay
 - [x] Strip AstroPaper default styling, apply art direction
-- [x] Home page: hero + latest-writings teaser (Mission + Try Jungle in nav)
+- [x] Home page: hero + latest-writings teaser
 - [x] Mission page (`/mission`)
 - [x] Writings: index + post reading layout
-- [x] About page removed; product outlink lives in nav as **Try Jungle**
+- [x] About page removed
+- [x] Jungle branding and outlink removed; site is now **Sahil & Suhaas**, home for the weekly newsletter (2026-10-05)
+- [x] Newsletters collection + `/newsletters` index (plain issue layout; bespoke newsletter look still being chosen)
 - [x] Replace placeholder company name (`companyName` in `astro-paper.config.ts`)
 - [x] Port first three Substack writings (Fluxx, Software Factories, Soft Pivot)
 - [x] Mirror both Substacks (7 posts), daily sync workflow, Substack comment CTA

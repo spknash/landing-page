@@ -5,6 +5,7 @@ export default {
     home: "Home",
     mission: "Mission",
     posts: "Writings",
+    newsletters: "Newsletters",
     tags: "Tags",
     about: "About",
     archives: "Archives",
@@ -47,6 +48,10 @@ export default {
 
     postsTitle: "Writings",
     postsDesc: "Long-form pieces — essays and notes.",
+
+    newslettersTitle: "Newsletters",
+    newslettersDesc: "What we got up to this week.",
+    newslettersEmpty: "The first issue is on its way.",
 
     missionTitle: "Mission",
     missionDesc: "What we believe and the bet we're making now.",

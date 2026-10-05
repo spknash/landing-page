@@ -1,2 +1,2 @@
 # landing-page
-A landing page that has our mission statement, writings, and outlink to the product page (jungleagents.com)
+sahilandsuhaas.com: our mission statement, writings, and weekly newsletter.

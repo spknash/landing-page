@@ -41,4 +41,21 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { posts, pages };
+/** Weekly newsletter issues, surfaced at `/newsletters/[slug]`. */
+export const NEWSLETTER_PATH = "src/content/newsletters";
+
+const newsletters = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: `./${NEWSLETTER_PATH}` }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      issue: z.number().int().positive(),
+      pubDatetime: z.date(),
+      description: z.string().optional(),
+      author: z.string().default(config.site.author),
+      ogImage: image().or(z.string()).optional(),
+      draft: z.boolean().optional(),
+    }),
+});
+
+export const collections = { posts, pages, newsletters };
