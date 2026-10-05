@@ -251,3 +251,112 @@ html:has(.newsletter-page) {
     border-color: var(--line);
   }
 }
+
+/* ===== Newsletter link cards ===== */
+.newsletter-prose .link-cards {
+  display: grid;
+  gap: 0.75rem;
+  margin-block: 1.5em;
+}
+
+.newsletter-prose .link-card {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  padding: 0.625rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: color-mix(in srgb, white 45%, transparent);
+  text-decoration: none;
+  transition:
+    border-color 0.15s,
+    background-color 0.15s;
+}
+
+.newsletter-prose .link-card:hover {
+  border-color: color-mix(in srgb, var(--ink) 30%, transparent);
+  background: color-mix(in srgb, white 75%, transparent);
+}
+
+.newsletter-prose .link-card-thumb {
+  position: relative;
+  flex: none;
+  align-self: center;
+  width: 8.5rem;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--line);
+}
+
+.newsletter-prose .link-card-thumb img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.newsletter-prose .link-card-thumb-text {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: 0.5rem;
+  font-size: 0.8125rem;
+  font-style: italic;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--ink);
+}
+
+.newsletter-prose .link-card-play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background: color-mix(in srgb, black 60%, transparent);
+}
+
+.newsletter-prose .link-card-play::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  translate: -50% -50%;
+  border-block: 0.4rem solid transparent;
+  border-inline-start: 0.65rem solid white;
+}
+
+.newsletter-prose .link-card-body {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.125rem;
+  line-height: 1.35;
+}
+
+.newsletter-prose .link-card-title {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.newsletter-prose .link-card-desc {
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+.newsletter-prose .link-card-site {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  opacity: 0.85;
+}
+
+@media (max-width: 30rem) {
+  .newsletter-prose .link-card-thumb {
+    width: 6rem;
+  }
+}

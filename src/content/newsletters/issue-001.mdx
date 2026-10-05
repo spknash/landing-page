@@ -10,15 +10,47 @@ heroCredit: "SpaceX, Starship Flight 14"
 heroCreditUrl: "https://www.spacex.com/launches/starship-flight-14"
 ---
 
+import LinkCards from "@/components/LinkCards.astro";
+import LinkCard from "@/components/LinkCard.astro";
+
 Hi everyone, welcome to our newsletter! We're planning to write about what we've been up to every week so you all can stay updated on what's been going on in our lives.
 
 This is the start of the first week that Suhaas and I are working full-time on our startup. Here's a quick list of things we've done recently:
 
-- Created a landing page for Cerebellum: [usecerebellum.com](https://usecerebellum.com)
-- Wrote a [whitepaper](https://www.usecerebellum.com/whitepaper/) on what we're building
-- Recorded a [demo video](https://youtu.be/YwLkXPcV2pQ) of Cerebellum
-- Recorded a [founder video](https://youtu.be/-ztevn9FLHE) for applications
-- Applied to the 16VC and PearX accelerators
+<LinkCards>
+  <LinkCard
+    href="https://usecerebellum.com"
+    title="We made a landing page"
+    description="Custom models for everyone."
+    site="usecerebellum.com"
+    image="https://www.usecerebellum.com/opengraph-image.png?opengraph-image.3kr4b57robt33.png"
+  />
+  <LinkCard
+    href="https://www.usecerebellum.com/whitepaper/"
+    title="We wrote a whitepaper"
+    description="Continuous distillation of frontier models for production tasks."
+    site="usecerebellum.com/whitepaper"
+    thumbText="Continuous Distillation of Frontier Models"
+  />
+  <LinkCard
+    href="https://youtu.be/YwLkXPcV2pQ"
+    title="We recorded a demo"
+    description="A walkthrough of Cerebellum in action."
+    site="youtube.com"
+    image="https://img.youtube.com/vi/YwLkXPcV2pQ/hqdefault.jpg"
+    video
+  />
+  <LinkCard
+    href="https://youtu.be/-ztevn9FLHE"
+    title="We recorded a founder video"
+    description="The two of us, for accelerator applications."
+    site="youtube.com"
+    image="https://img.youtube.com/vi/-ztevn9FLHE/hqdefault.jpg"
+    video
+  />
+</LinkCards>
+
+And we applied to the [16VC](https://16vc.notion.site/16VC-Accelerator-3d02d0512c558091a17ed9a67cbb10a4) and [PearX](https://pear.vc) accelerators. Fingers crossed!
 
 ## Who we talked to
 
