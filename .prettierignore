@@ -15,3 +15,6 @@
 
 # Ignore MDX files
 *.mdx
+# prettier-plugin-astro cannot parse the inline <style>/<script> inside the
+# rotateDaily JSX expression; keep this file hand-formatted.
+src/components/HeroSection.astro

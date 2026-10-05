@@ -1,0 +1,94 @@
+---
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { Image } from "astro:assets";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Main from "@/components/Main.astro";
+import LinkButton from "@/components/LinkButton.astro";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import IconArrowLeft from "@/assets/icons/IconArrowLeft.svg";
+import { getSortedNewsletters } from "@/utils/getSortedNewsletters";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+
+const issues = getSortedNewsletters(await getCollection("newsletters"));
+---
+
+<Layout
+  title={`${t.pages.newslettersTitle} | ${config.site.title}`}
+  description={t.pages.newslettersDesc}
+>
+  <Header />
+
+  <div aria-hidden="true" class="h-0"></div>
+
+  <LinkButton
+    href={getRelativeLocaleUrl(locale, "")}
+    class="focus-outline hover:text-foreground/75 fixed top-14 left-4 z-40 text-sm sm:left-6"
+  >
+    <IconArrowLeft
+      class="inline-block size-4 rtl:rotate-180"
+      aria-hidden="true"
+    />
+    <span>{t.nav.home}</span>
+  </LinkButton>
+
+  <Main
+    class="newsletter-page"
+    pageTitle={t.pages.newslettersTitle}
+    pageDesc={t.pages.newslettersDesc}
+  >
+    {
+      issues.length === 0 ? (
+        <p class="text-muted-foreground font-body">
+          {t.pages.newslettersEmpty}
+        </p>
+      ) : (
+        <ul class="divide-line/40 divide-y">
+          {issues.map(({ id, data }) => (
+            <li class="group py-6">
+              <a
+                href={getRelativeLocaleUrl(locale, `newsletters/${id}`)}
+                class="block focus-visible:outline-none"
+              >
+                <Image
+                  src={data.heroImage}
+                  alt={data.heroAlt}
+                  widths={[640, 960, 1280]}
+                  sizes="(min-width: 42rem) 42rem, 100vw"
+                  class="mb-4 aspect-[3/2] w-full rounded object-cover transition-opacity group-hover:opacity-90"
+                />
+                <p class="text-muted-foreground mb-1 text-sm italic">
+                  No. {data.issue} · {data.author} ·{" "}
+                  {dayjs(data.pubDatetime)
+                    .tz(config.site.timezone)
+                    .format("MMMM D, YYYY")}
+                </p>
+                <h2 class="group-hover:text-accent text-2xl leading-snug decoration-1 underline-offset-4 transition-colors group-hover:underline">
+                  {data.title}
+                </h2>
+                {data.description && (
+                  <p class="text-muted-foreground mt-2 max-w-prose leading-relaxed">
+                    {data.description}
+                  </p>
+                )}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </Main>
+
+  <Footer />
+</Layout>

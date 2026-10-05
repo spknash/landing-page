@@ -3,6 +3,7 @@ export interface UIStrings {
     home: string;
     mission: string;
     posts: string;
+    newsletters: string;
     tags: string;
     about: string;
     archives: string;
@@ -45,6 +46,10 @@ export interface UIStrings {
 
     postsTitle: string;
     postsDesc: string;
+
+    newslettersTitle: string;
+    newslettersDesc: string;
+    newslettersEmpty: string;
 
     missionTitle: string;
     missionDesc: string;

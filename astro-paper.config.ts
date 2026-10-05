@@ -3,7 +3,7 @@ import { defineAstroPaperConfig } from "./src/types/config";
 export default defineAstroPaperConfig({
   site: {
     url: "https://sahilandsuhaas.com/",
-    companyName: "Jungle",
+    companyName: "Sahil & Suhaas",
     mission: [
       "Humans have always had a natural drive to make things. For most of history, almost no one got to build what they truly believed in. Most of our time and energy went towards earning a living, leaving little or no time remaining for the things we actually want to build.",
       "AI presents the opportunity to change this. The capability is already here; but the killer interface still hasn't arrived yet. A very small percent of the world is leveraging this new technology.",
@@ -11,7 +11,7 @@ export default defineAstroPaperConfig({
       "We're building what unleashes machine intelligence for everyone. So anyone can create what they believe in.",
     ],
     description:
-      "What we believe and the bet we're making now. Essays, and the product we're building.",
+      "What we believe, what we're writing, and a weekly newsletter on what we've been up to.",
     author: "Suhaas & Sahil",
     profile: "",
     ogImage: "default-og.jpg",

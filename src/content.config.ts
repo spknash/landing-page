@@ -41,4 +41,26 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { posts, pages };
+/** Weekly newsletter issues, surfaced at `/newsletters/[slug]`. */
+export const NEWSLETTER_PATH = "src/content/newsletters";
+
+const newsletters = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: `./${NEWSLETTER_PATH}` }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      issue: z.number().int().positive(),
+      pubDatetime: z.date(),
+      description: z.string().optional(),
+      author: z.string().default(config.site.author),
+      /** Headline image shown above the title, on the index, and in link previews. */
+      heroImage: image(),
+      heroAlt: z.string().default(""),
+      /** Optional photo credit shown under the headline image. */
+      heroCredit: z.string().optional(),
+      heroCreditUrl: z.url().optional(),
+      draft: z.boolean().optional(),
+    }),
+});
+
+export const collections = { posts, pages, newsletters };

@@ -1,0 +1,92 @@
+---
+title: "3… 2… 1… Ignition"
+issue: 1
+pubDatetime: 2026-10-05T09:00:00-04:00
+description: "Our first week working full-time on Cerebellum: a landing page, a whitepaper, two accelerator applications, a lot of calls, and Six Flags."
+author: "Sahil"
+heroImage: "../../assets/newsletters/issue-001/starship.jpg"
+heroAlt: "A Starship rocket lifting off the launch pad in a cloud of orange-lit exhaust"
+heroCredit: "SpaceX, Starship Flight 14"
+heroCreditUrl: "https://www.spacex.com/launches/starship-flight-14"
+---
+
+import LinkCards from "@/components/LinkCards.astro";
+import LinkCard from "@/components/LinkCard.astro";
+
+Hi everyone, welcome to our newsletter! We're planning to write about what we've been up to every week so you all can stay updated on what's been going on in our lives.
+
+This is the start of the first week that Suhaas and I are working full-time on our startup. Here's a quick list of things we've done recently:
+
+<LinkCards>
+  <LinkCard
+    href="https://usecerebellum.com"
+    title="We made a landing page"
+    description="Custom models for everyone."
+    site="usecerebellum.com"
+    image="https://www.usecerebellum.com/opengraph-image.png?opengraph-image.3kr4b57robt33.png"
+  />
+  <LinkCard
+    href="https://www.usecerebellum.com/whitepaper/"
+    title="We wrote a whitepaper"
+    description="Continuous distillation of frontier models for production tasks."
+    site="usecerebellum.com/whitepaper"
+    thumbText="Continuous Distillation of Frontier Models"
+  />
+  <LinkCard
+    href="https://youtu.be/YwLkXPcV2pQ"
+    title="We recorded a demo"
+    description="A walkthrough of Cerebellum in action."
+    site="youtube.com"
+    image="https://img.youtube.com/vi/YwLkXPcV2pQ/hqdefault.jpg"
+    video
+  />
+  <LinkCard
+    href="https://youtu.be/-ztevn9FLHE"
+    title="We recorded a founder video"
+    description="The two of us, for accelerator applications."
+    site="youtube.com"
+    image="https://img.youtube.com/vi/-ztevn9FLHE/hqdefault.jpg"
+    video
+  />
+</LinkCards>
+
+And we applied to the [16VC](https://16vc.notion.site/16VC-Accelerator-3d02d0512c558091a17ed9a67cbb10a4) and [PearX](https://pear.vc) accelerators.
+
+## Who we talked to
+
+We spent a lot of the week on calls with founders and builders in the AI space. Here's a quick overview of the conversations we had and what we learned:
+
+- **Aayush (Driftwood).** His big lesson for us was to validate that people will pay before building too much, and that warm intros and in-person conversations get you much further than cold outreach.
+- **Hiltin (AiriWheels).** We talked about where custom models could help AiriWheels, and about starting with data that isn't sensitive.
+- **Aryan (Mirrors).** Aryan pushed back in a useful way: many companies are still happy calling frontier models, and fine-tuning tends to happen in bursts rather than continuously. He offered to introduce us to others in the space.
+- **Rajit (Prism Inference).** Rajit has pivoted before, and his advice was to find customers who are really unhappy with what they use today before building anything.
+- **Vedant (Latent).** Latent monitors model behavior during inference, which fits nicely next to what we're doing. His outreach tip: offer something small and free up front.
+- **Dhanasree (Turing).** Dhanasree is helping us find the right people to talk to about fine-tuning at Turing.
+
+## Events
+
+- **Specialized models meetup (Sep 29).** The theme was that training your own model is worth it when the task is narrow and stable and you have good data, good evals and a clear economic case.
+- **Future of Work: Agent Driven, by Turing Growth (Oct 1).** Airtable talked about what makes AI agents useful in practice. Their advice was to start with tasks where mistakes are forgivable and keep a human in the loop for anything higher stakes.
+
+## What's coming up
+
+Suhaas and I are focusing on outreach and building credibility in the space. Look out for some posts from us about research we've been doing on model distillation! We're also pushing to talk to more people in this space to learn about AI companies' problems and to find more design partners.
+
+## Other stuff
+
+We surprised Suhaas for his 25th birthday by going to Six Flags!
+
+{/* Columns sized to each item's aspect ratio (9:16 video, 3:4 photo) so they line up at the same height. */}
+<div class="media-pair" style="grid-template-columns: 9fr 12fr">
+<video
+  src="/newsletters/issue-001/six-flags.mp4"
+  poster="/newsletters/issue-001/six-flags-poster.jpg"
+  controls
+  playsinline
+  preload="metadata"
+  aria-label="The surprise: taking off the blindfold in the Six Flags parking lot"
+></video>
+
+![Four of us at Six Flags at night, in front of a giant red Halloween figure](../../assets/newsletters/issue-001/six-flags.jpg)
+
+</div>

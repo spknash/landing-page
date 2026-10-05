@@ -56,7 +56,9 @@ export const defaultHeroSlug = "poppies";
 export const pinnedHeroSlug: string | null = "washington-delaware";
 
 /** Home hero rotation pool (one painting per calendar day, site timezone). */
-export const heroRotationSlugs = heroCandidates.map(candidate => candidate.slug);
+export const heroRotationSlugs = heroCandidates.map(
+  candidate => candidate.slug
+);
 
 export function getHeroCandidate(slug: string | null | undefined) {
   return (

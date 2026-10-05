@@ -5,6 +5,8 @@
 @import "@fontsource-variable/cormorant-garamond";
 @import "@fontsource-variable/cormorant-garamond/wght-italic.css";
 @import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource-variable/newsreader/opsz.css";
+@import "@fontsource-variable/newsreader/opsz-italic.css";
 @import "./theme.css";
 @import "./typography.css";
 @import "rehype-callouts/theme/obsidian";
@@ -82,14 +84,6 @@
   @apply text-foreground;
 }
 
-.glass-nav-cta {
-  @apply bg-bark text-surface inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 font-medium transition-colors;
-}
-.glass-nav-cta:hover {
-  background: var(--forest);
-  color: var(--accent-foreground);
-}
-
 /* Hero title: layered mat glow, no backdrop panel. Stacked radii keep the name
    legible over dark passages (Leutze's flag canton) without reading as a box. */
 .hero-title {
@@ -151,4 +145,240 @@ header + main[data-layout="index"] {
 
 :target {
   scroll-margin-block: 5rem;
+}
+
+/* ===== Newsletters: a plain letter on warm paper =====
+   Any page containing `.newsletter-page` swaps the linen ground for paper, so the
+   header pill and footer sit on the same surface as the issue. */
+html:has(.newsletter-page) {
+  --bg: #f7f4ee;
+  --line: #e3ddd3;
+  --muted: #8a827a;
+  --ink: #2a2724;
+}
+
+.newsletter-page,
+.newsletter-page :is(h1, h2, h3) {
+  font-family: "Newsreader Variable", var(--font-body);
+}
+
+.newsletter-prose {
+  font-size: 1.1875rem;
+  line-height: 1.75;
+  color: var(--ink);
+
+  & > * + * {
+    margin-top: 1.1em;
+  }
+
+  & h2,
+  & h3 {
+    font-weight: 500;
+    font-style: italic;
+    line-height: 1.3;
+    margin-top: 2em;
+  }
+
+  & h2 {
+    font-size: 1.375rem;
+  }
+
+  & h3 {
+    font-size: 1.1875rem;
+  }
+
+  & a {
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 4px;
+    transition: text-decoration-color 0.15s;
+  }
+
+  & a:hover {
+    text-decoration-color: currentColor;
+  }
+
+  & blockquote {
+    padding-inline-start: 1.125rem;
+    border-inline-start: 1px solid var(--line);
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  & ul,
+  & ol {
+    padding-inline-start: 1.25em;
+  }
+
+  & ul {
+    list-style: disc;
+  }
+
+  & ol {
+    list-style: decimal;
+  }
+
+  & li + li {
+    margin-top: 0.35em;
+  }
+
+  & img,
+  & video {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    /* Keep tall phone photos from taking over the screen. */
+    max-height: 80vh;
+    margin-inline: auto;
+    border-radius: 4px;
+  }
+
+  & p:has(> img:only-child),
+  & video,
+  & figure {
+    margin-block: 2em;
+  }
+
+  /* Two images or videos side by side, e.g. a clip next to a photo. */
+  & .media-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    align-items: start;
+    margin-block: 2em;
+
+    & p:has(> img),
+    & video {
+      margin: 0;
+    }
+
+    & img,
+    & video {
+      width: 100%;
+      max-height: none;
+    }
+  }
+
+  & figcaption {
+    margin-top: 0.6em;
+    font-size: 0.9375rem;
+    font-style: italic;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  & hr {
+    margin-block: 2.5em;
+    border-color: var(--line);
+  }
+}
+
+/* ===== Newsletter link cards ===== */
+.newsletter-prose .link-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.875rem;
+  margin-block: 1.5em;
+}
+
+.newsletter-prose .link-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding: 0.5rem 0.5rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: color-mix(in srgb, white 45%, transparent);
+  text-decoration: none;
+  transition:
+    border-color 0.15s,
+    background-color 0.15s;
+}
+
+.newsletter-prose .link-card:hover {
+  border-color: color-mix(in srgb, var(--ink) 30%, transparent);
+  background: color-mix(in srgb, white 75%, transparent);
+}
+
+.newsletter-prose .link-card-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--line);
+}
+
+.newsletter-prose .link-card-thumb img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.newsletter-prose .link-card-thumb-text {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: 0.75rem;
+  font-size: 0.9375rem;
+  font-style: italic;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--ink);
+}
+
+.newsletter-prose .link-card-play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background: color-mix(in srgb, black 60%, transparent);
+}
+
+.newsletter-prose .link-card-play::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  translate: -50% -50%;
+  border-block: 0.45rem solid transparent;
+  border-inline-start: 0.75rem solid white;
+}
+
+.newsletter-prose .link-card-body {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding-inline: 0.25rem;
+  line-height: 1.35;
+}
+
+.newsletter-prose .link-card-title {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.newsletter-prose .link-card-desc {
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+.newsletter-prose .link-card-site {
+  margin-top: 0.125rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
+  opacity: 0.85;
+}
+
+@media (max-width: 26rem) {
+  .newsletter-prose .link-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
