@@ -70,8 +70,6 @@ const t = useTranslations(locale);
     >
       {title}
     </h1>
-    <p class="text-muted-foreground mt-4 text-base">By {author}</p>
-
     <figure class="mt-10">
       <Image
         src={heroImage}
@@ -100,6 +98,7 @@ const t = useTranslations(locale);
 
     <article class="newsletter-prose mt-10">
       <Content />
+      <p class="mt-10 italic">— {author}</p>
     </article>
 
     <a

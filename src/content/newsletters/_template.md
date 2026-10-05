@@ -19,3 +19,6 @@ Write the issue here, as plain prose. Use `## Subheads` to break it up.
 
 Images: put them in `src/assets/newsletters/issue-NNN/` and reference them
 relatively, e.g. `![What this shows](../../assets/newsletters/issue-001/photo.jpg)`.
+
+In an `.mdx` issue, wrap two images (or a video and an image) in
+`<div class="media-pair">` to show them side by side; see issue-001.mdx.
