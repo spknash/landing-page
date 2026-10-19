@@ -1,0 +1,31 @@
+---
+/**
+ * A photo shown as a taped-on polaroid with a short caption. Use inside
+ * `<Polaroids>`, which scatters them across the page with a slight tilt.
+ *
+ * `src` is an imported local image. Photos are cropped square like a real
+ * polaroid; `focus` moves the crop (any CSS `object-position`, e.g. "top").
+ */
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+type Props = {
+  src: ImageMetadata;
+  alt: string;
+  caption: string;
+  focus?: string;
+};
+
+const { src, alt, caption, focus } = Astro.props;
+---
+
+<figure class="polaroid">
+  <Image
+    src={src}
+    alt={alt}
+    widths={[320, 640]}
+    sizes="(min-width: 40rem) 18rem, 50vw"
+    style={focus ? `object-position: ${focus}` : undefined}
+  />
+  <figcaption>{caption}</figcaption>
+</figure>
