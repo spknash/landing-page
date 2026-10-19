@@ -466,6 +466,16 @@ html:has(.newsletter-page) {
   }
 }
 
+.newsletter-prose .polaroid.polaroid-wide {
+  flex-basis: 100%;
+  max-width: 32rem;
+  margin-top: 0;
+
+  & img {
+    aspect-ratio: auto;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .newsletter-prose .polaroid {
     transition: none;

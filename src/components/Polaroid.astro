@@ -5,6 +5,8 @@
  *
  * `src` is an imported local image. Photos are cropped square like a real
  * polaroid; `focus` moves the crop (any CSS `object-position`, e.g. "top").
+ * `wide` keeps the photo's own shape and spans the full row, for things like a
+ * document that a square crop would cut off.
  */
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
@@ -14,17 +16,20 @@ type Props = {
   alt: string;
   caption: string;
   focus?: string;
+  wide?: boolean;
 };
 
-const { src, alt, caption, focus } = Astro.props;
+const { src, alt, caption, focus, wide } = Astro.props;
 ---
 
-<figure class="polaroid">
+<figure class:list={["polaroid", { "polaroid-wide": wide }]}>
   <Image
     src={src}
     alt={alt}
-    widths={[320, 640]}
-    sizes="(min-width: 40rem) 18rem, 50vw"
+    widths={wide ? [640, 1024] : [320, 640]}
+    sizes={wide
+      ? "(min-width: 40rem) 32rem, 100vw"
+      : "(min-width: 40rem) 18rem, 50vw"}
     style={focus ? `object-position: ${focus}` : undefined}
   />
   <figcaption>{caption}</figcaption>
