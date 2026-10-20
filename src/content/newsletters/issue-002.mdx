@@ -8,6 +8,8 @@ heroImage: "../../assets/newsletters/issue-002/bay-bridge.jpg"
 heroAlt: "The Bay Bridge stretching across the water on a clear blue day, seen from the Embarcadero"
 ---
 
+import LinkCards from "@/components/LinkCards.astro";
+import LinkCard from "@/components/LinkCard.astro";
 import Polaroids from "@/components/Polaroids.astro";
 import Polaroid from "@/components/Polaroid.astro";
 import hackathon from "@/assets/newsletters/issue-002/hackathon.jpg";
@@ -29,6 +31,24 @@ Hey everyone! We missed last week, so this newsletter covers the past two weeks.
 - **We pitched to Pear's partners.** They passed on us, but we learned a lot about the fundraising process.
 - **We now have three design partners.** A legal AI company joined the two we already had.
 - **We applied to a16z alpha.**
+- **We launched Paradee.** A tiny open-source text-to-speech model, distilled from Kokoro-82M down to 8M parameters, that runs on a regular CPU.
+
+<LinkCards>
+  <LinkCard
+    href="https://www.sahilmahendrakar.com/writings/paradee"
+    title="Paradee: Distilling a voice model to one-tenth its size"
+    description="The writeup on distilling Kokoro-82M into an 8M-parameter voice model."
+    site="sahilmahendrakar.com"
+    image="https://sahilmahendrakar.com/writings/paradee/img/cover.png"
+  />
+  <LinkCard
+    href="https://huggingface.co/sahilmahendrakar/Paradee-8M-v1.0"
+    title="Paradee-8M on Hugging Face"
+    description="The open-source model weights."
+    site="huggingface.co"
+    image="https://cdn-thumbnails.huggingface.co/social-thumbnails/models/sahilmahendrakar/Paradee-8M-v1.0.png"
+  />
+</LinkCards>
 
 <Polaroids>
   <Polaroid src={incorporation} alt="The top of Cerebellum Labs, Inc.'s Delaware certificate of incorporation" caption="Cerebellum Labs, Inc. is official" wide />
