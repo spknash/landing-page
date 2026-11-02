@@ -246,6 +246,16 @@ html:has(.newsletter-page) {
     margin-block: 2em;
   }
 
+  /* An embedded YouTube video, full width at 16:9. */
+  & .video-embed {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: 4px;
+    margin-block: 2em;
+  }
+
   /* Two images or videos side by side, e.g. a clip next to a photo. */
   & .media-pair {
     display: grid;

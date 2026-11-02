@@ -1,0 +1,73 @@
+---
+title: "It's Fall"
+issue: 3
+pubDatetime: 2026-11-02T12:00:00-05:00
+description: "Our first check, our first pilot results, Paradee 1.2, and a lot of fall in New York."
+author: "Sahil"
+heroImage: "../../assets/newsletters/issue-003/cover.jpg"
+heroAlt: "A tree turning orange and yellow over a brownstone sidewalk near our apartment, under a clear blue sky"
+---
+
+import LinkCards from "@/components/LinkCards.astro";
+import LinkCard from "@/components/LinkCard.astro";
+import Polaroids from "@/components/Polaroids.astro";
+import Polaroid from "@/components/Polaroid.astro";
+import diwali from "@/assets/newsletters/issue-003/diwali.jpg";
+import dannyBirthday from "@/assets/newsletters/issue-003/danny-birthday.jpg";
+import corgiCafe from "@/assets/newsletters/issue-003/corgi-cafe.jpg";
+import skeleton from "@/assets/newsletters/issue-003/skeleton.jpg";
+
+Hey everyone! This is another two-week issue. We stayed in New York this time, mostly heads-down on Cerebellum, with a lot of fall stuff packed in between.
+
+Our friend Aaryan stayed with us for a weekend and recorded an interview with us.
+
+<iframe
+  class="video-embed"
+  src="https://www.youtube-nocookie.com/embed/9E6t70BuenQ"
+  title="Cerebellum Jabs"
+  loading="lazy"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+></iframe>
+
+## General Updates on Cerebellum
+
+- **We got our first check.** A small $15k check from an investor.
+- **We've been talking to investors.** While we're not actively fundraising, we had about a dozen intro calls and coffees with investors over the two weeks.
+- **We applied to accelerators**, including a16z Speedrun and YC.
+- **We launched Paradee 1.2.** It now speaks four voices in the same 8.5 MB model, with no loss in quality.
+- **We finished our first design partner pilot.** We fine-tuned a 9B-parameter model on receipt extraction, and it was 33% more accurate than GPT-5.2 at 80% lower cost.
+
+<LinkCards>
+  <LinkCard
+    href="https://www.sahilmahendrakar.com/writings/paradee-1-2"
+    title="Paradee 1.2: Expanding to additional voices"
+    description="Paradee now speaks four voices without growing in size or losing quality."
+    site="sahilmahendrakar.com"
+    image="https://sahilmahendrakar.com/writings/paradee-1-2/img/cover.jpg"
+  />
+  <LinkCard
+    href="https://www.cerebellumlabs.ai/papers/receipt-case-study/"
+    title="Post-Training a 9B Open Model to Read Wholesale Receipts"
+    description="Our pilot case study: better than GPT-5.2 at a fraction of the cost."
+    site="cerebellumlabs.ai"
+    thumbText="Reading Wholesale Receipts with a 9B Model"
+  />
+</LinkCards>
+
+## Around New York
+
+On Friday we played Blood on the Clocktower and then went to a friend's 24th birthday, and on Saturday we went to a Diwali party and housewarming in Brooklyn. We also celebrated our roommate Danny's birthday over dinner, and went to a Jev event at the Corgi Cafe, which had a real corgi.
+
+<Polaroids>
+  <Polaroid src={diwali} alt="Eight friends posing together in an apartment strung with fairy lights" caption="Diwali and a housewarming in Brooklyn" focus="center 40%" />
+  <Polaroid src={dannyBirthday} alt="Two friends at a dinner table covered in small Korean dishes" caption="Danny's birthday dinner" focus="center 35%" />
+  <Polaroid src={corgiCafe} alt="A corgi climbing onto someone's lap on a green couch in a cafe" caption="A real corgi at the Corgi Cafe" focus="center 45%" />
+</Polaroids>
+
+The next week we went to Papers We Love NYC in Williamsburg for a talk on what math can tell us about language, Arca's office warming, and on Friday the NYC Frontier Hackathon. For Halloween, the roommates were going to dress up as cats, but we ended up staying in and playing board games instead.
+
+<Polaroids>
+  <Polaroid src={skeleton} alt="A giant skeleton towering over a stoop decorated for Halloween, with a purple witch hat below" caption="Our neighborhood is ready for Halloween" focus="center 30%" />
+</Polaroids>
