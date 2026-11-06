@@ -1,0 +1,15 @@
+---
+/**
+ * A quotation set apart from the letter: larger, centered, with a hanging
+ * opening mark and, if `by` is given, the speaker's name underneath. Use inside
+ * a newsletter issue.
+ */
+type Props = { by?: string };
+
+const { by } = Astro.props;
+---
+
+<figure class="pull-quote">
+  <blockquote><slot /></blockquote>
+  {by && <figcaption>{by}</figcaption>}
+</figure>

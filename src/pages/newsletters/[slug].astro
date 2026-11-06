@@ -27,12 +27,14 @@ const {
   pubDatetime,
   description,
   author,
+  coauthor,
   heroImage,
   heroAlt,
   heroCredit,
   heroCreditUrl,
 } = issue.data;
 const { Content } = await render(issue);
+const byline = coauthor ? `${author} & ${coauthor}` : author;
 
 const ogImage = (await getImage({ src: heroImage, width: 1200, format: "jpg" }))
   .src;
@@ -50,7 +52,7 @@ const t = useTranslations(locale);
   description={description}
   ogImage={ogImage}
   pubDatetime={pubDatetime}
-  author={author}
+  author={byline}
 >
   <Header />
 
@@ -98,7 +100,7 @@ const t = useTranslations(locale);
 
     <article class="newsletter-prose mt-10">
       <Content />
-      <p class="mt-10 italic">— {author}</p>
+      {!coauthor && <p class="signoff">— {author}</p>}
     </article>
 
     <a

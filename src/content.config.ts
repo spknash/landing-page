@@ -53,6 +53,11 @@ const newsletters = defineCollection({
       pubDatetime: z.date(),
       description: z.string().optional(),
       author: z.string().default(config.site.author),
+      /**
+       * A second writer who adds their own section. The page then stops signing
+       * the letter for the author; each part signs itself with `<Signoff>`.
+       */
+      coauthor: z.string().optional(),
       /** Headline image shown above the title, on the index, and in link previews. */
       heroImage: image(),
       heroAlt: z.string().default(""),

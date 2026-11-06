@@ -399,6 +399,83 @@ html:has(.newsletter-page) {
   }
 }
 
+/* The signature at the end of a letter, or of each writer's part of one. */
+.newsletter-prose .signoff {
+  margin-top: 2.5rem;
+  font-style: italic;
+}
+
+/* ===== Newsletter pull quote: a line worth setting apart ===== */
+.newsletter-prose .pull-quote {
+  position: relative;
+  max-width: 32rem;
+  margin: 2.75em auto;
+  padding-inline: 1.5rem;
+  text-align: center;
+
+  & blockquote {
+    padding: 0;
+    border: 0;
+    color: var(--ink);
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.4;
+    text-wrap: balance;
+  }
+
+  & blockquote > * + * {
+    margin-top: 0.6em;
+  }
+
+  /* A large hanging opening mark, faded into the paper. */
+  & blockquote::before {
+    content: "\201C";
+    position: absolute;
+    top: -0.55em;
+    left: 0;
+    font-size: 4.5rem;
+    line-height: 1;
+    color: var(--moss, var(--muted));
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  & figcaption {
+    margin-top: 1rem;
+    font-size: 0.8125rem;
+    font-style: normal;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  & figcaption::before {
+    content: "";
+    display: block;
+    width: 2rem;
+    height: 1px;
+    margin: 0 auto 0.85rem;
+    background: var(--line);
+  }
+}
+
+@media (max-width: 26rem) {
+  .newsletter-prose .pull-quote {
+    padding-inline: 0.75rem;
+
+    & blockquote {
+      font-size: 1.3125rem;
+    }
+
+    & blockquote::before {
+      font-size: 3.5rem;
+      top: -0.5em;
+      left: -0.25rem;
+    }
+  }
+}
+
 /* ===== Newsletter polaroids: photos taped onto the page ===== */
 .newsletter-prose .polaroids {
   display: flex;

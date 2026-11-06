@@ -4,6 +4,7 @@ issue: 3
 pubDatetime: 2026-11-02T12:00:00-05:00
 description: "Our first check, our first pilot results, Paradee 1.2, and a lot of fall in New York."
 author: "Sahil"
+coauthor: "Suhaas"
 heroImage: "../../assets/newsletters/issue-003/cover.jpg"
 heroAlt: "A tree turning orange and yellow over a brownstone sidewalk near our apartment, under a clear blue sky"
 ---
@@ -12,10 +13,13 @@ import LinkCards from "@/components/LinkCards.astro";
 import LinkCard from "@/components/LinkCard.astro";
 import Polaroids from "@/components/Polaroids.astro";
 import Polaroid from "@/components/Polaroid.astro";
+import PullQuote from "@/components/PullQuote.astro";
+import Signoff from "@/components/Signoff.astro";
 import diwali from "@/assets/newsletters/issue-003/diwali.jpg";
 import dannyBirthday from "@/assets/newsletters/issue-003/danny-birthday.jpg";
 import corgiCafe from "@/assets/newsletters/issue-003/corgi-cafe.jpg";
 import skeleton from "@/assets/newsletters/issue-003/skeleton.jpg";
+import pocha from "@/assets/newsletters/issue-003/pocha-32.jpg";
 
 Hey everyone! This is another two-week issue. We stayed in New York this time, mostly heads-down on Cerebellum, with a lot of fall stuff packed in between.
 
@@ -71,3 +75,23 @@ The next week we went to Papers We Love NYC in Williamsburg for a talk on what m
 <Polaroids>
   <Polaroid src={skeleton} alt="A giant skeleton towering over a stoop decorated for Halloween, with a purple witch hat below" caption="Our neighborhood is ready for Halloween" focus="center 30%" />
 </Polaroids>
+
+<Signoff name="Sahil" />
+
+## from Suhaas
+
+Sahil covered most of it. I'll add just a little bit. On Friday I got Pocha 32 with Leon and Gabe. I was talking to Leon about the problems I've been having with outbound. He showed me his unconventional outbound strategy. I was inspired! I think in today's world everyone is saying the same AI slop shit. There's a lot of value in being a little unhinged ;)
+
+<Polaroids>
+  <Polaroid src={pocha} alt="Suhaas, Leon and Gabe squeezed around a small table at Pocha 32, lit entirely blue, with a bowl of soju punch in front of them" caption="Pocha 32 with Leon and Gabe" wide />
+</Polaroids>
+
+Leon Tan said it best.
+
+<PullQuote>
+  In a crowded marketplace, fitting in is a failure. In a busy marketplace, not standing out is the same as being invisible.
+</PullQuote>
+
+Al Davis also said it best.
+
+<Signoff name="Suhaas" />

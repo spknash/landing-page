@@ -69,7 +69,11 @@ const issues = getSortedNewsletters(await getCollection("newsletters"));
                   class="mb-4 aspect-[3/2] w-full rounded object-cover transition-opacity group-hover:opacity-90"
                 />
                 <p class="text-muted-foreground mb-1 text-sm italic">
-                  No. {data.issue} · {data.author} ·{" "}
+                  No. {data.issue} ·{" "}
+                  {data.coauthor
+                    ? `${data.author} & ${data.coauthor}`
+                    : data.author}{" "}
+                  ·{" "}
                   {dayjs(data.pubDatetime)
                     .tz(config.site.timezone)
                     .format("MMMM D, YYYY")}
