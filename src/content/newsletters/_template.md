@@ -6,6 +6,10 @@ issue: 1
 pubDatetime: 2026-10-05T12:00:00-04:00
 description: "One line teaser for the index and link previews."
 author: "Sahil"
+# Optional. A second writer with their own section at the end. The page then
+# stops signing the letter for you: sign each part with `<Signoff name="..." />`
+# (see issue-003.mdx).
+# coauthor: "Suhaas"
 # Required. Keep it next to the issue's other images.
 heroImage: "../../assets/newsletters/issue-NNN/headline.jpg"
 heroAlt: "What the headline image shows"
@@ -22,3 +26,5 @@ relatively, e.g. `![What this shows](../../assets/newsletters/issue-001/photo.jp
 
 In an `.mdx` issue, wrap two images (or a video and an image) in
 `<div class="media-pair">` to show them side by side; see issue-001.mdx.
+A line worth setting apart goes in `<PullQuote by="Who said it">...</PullQuote>`;
+see issue-003.mdx.

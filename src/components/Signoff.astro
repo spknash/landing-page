@@ -1,0 +1,12 @@
+---
+/**
+ * A letter-style signature line ("— Sahil"). Issues normally get one for free
+ * from the newsletter page; use this only in an issue with a `coauthor`, where
+ * each writer signs their own part.
+ */
+type Props = { name: string };
+
+const { name } = Astro.props;
+---
+
+<p class="signoff">— {name}</p>
