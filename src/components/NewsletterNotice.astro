@@ -16,9 +16,11 @@ import config from "@/config";
 type Props = {
   title: string;
   description: string;
+  /** Show links to the latest issue and the archive. Defaults to true. */
+  links?: boolean;
 };
 
-const { title, description } = Astro.props;
+const { title, description, links = true } = Astro.props;
 
 const locale = Astro.currentLocale ?? config.site.lang;
 const latest = getSortedNewsletters(await getCollection("newsletters"))[0];
@@ -30,7 +32,7 @@ const latest = getSortedNewsletters(await getCollection("newsletters"))[0];
   <Main class="newsletter-page" pageTitle={title} pageDesc={description}>
     <ul class="newsletter-next-steps">
       {
-        latest && (
+        links && latest && (
           <li>
             <a href={getRelativeLocaleUrl(locale, `newsletters/${latest.id}`)}>
               Read the latest issue, No. {latest.data.issue}:{" "}
@@ -39,11 +41,15 @@ const latest = getSortedNewsletters(await getCollection("newsletters"))[0];
           </li>
         )
       }
-      <li>
-        <a href={getRelativeLocaleUrl(locale, "newsletters")}>
-          Browse every issue
-        </a>
-      </li>
+      {
+        links && (
+          <li>
+            <a href={getRelativeLocaleUrl(locale, "newsletters")}>
+              Browse every issue
+            </a>
+          </li>
+        )
+      }
     </ul>
   </Main>
   <Footer />
