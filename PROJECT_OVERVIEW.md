@@ -70,6 +70,16 @@ Quiet, nostalgic, painterly — see `.cursor/rules/design.mdc` for the enforced 
 - **Type:** Cormorant Garamond (display) · Literata (body) · mono (utility).
 - **Motion:** none for now (the load/scroll reveals were removed to keep the scaffold minimal).
 
+## Newsletter email subscriptions (Buttondown)
+
+Readers subscribe by email through **Buttondown** (account `suhaas`, set in `newsletter.buttondownUsername` in `astro-paper.config.ts`). The site is the canonical home of every issue; Buttondown only keeps the list and sends the mail.
+
+- **Signup form:** `src/components/SubscribeForm.astro`, at the end of every issue. It posts straight to Buttondown's embed endpoint, so the site holds no addresses and no secrets. With JavaScript the page stays put and shows a "check your inbox" line; without it, Buttondown redirects to `/newsletters/subscribed/`. After the reader clicks the confirmation link, Buttondown sends them to `/newsletters/confirmed/`. Both redirect URLs are set in Buttondown's newsletter settings (also editable via the API).
+- **Double opt-in** is on: nobody is on the list until they click the confirmation email.
+- **Sending:** `/newsletters/rss.xml` (`src/pages/newsletters/rss.xml.ts`) lists issues only, with the full issue rendered to email-safe HTML in `content:encoded` (`src/utils/renderForEmail.ts`: absolute URLs, mid-size images, link cards as plain links, videos as links). Buttondown's **RSS-to-email** automation (Settings → Basic → RSS-to-email; needs the Basic plan) polls it every 30 minutes and creates a **draft** for each new item, which we review and send from the Buttondown dashboard. Items are identified by their URL, so editing an issue never re-sends it; renaming an issue's file changes its URL and would.
+- **Automation settings to use:** feed `https://www.sahilandsuhaas.com/newsletters/rss.xml`, cadence "every time a new item appears", behavior "create a draft", "skip old items" on. Template body: `{{ item.content }}`, subject `{{ item.title }}`.
+- The writings feed at `/rss.xml` is unchanged and is not connected to Buttondown.
+
 ## Content model
 
 - **Write on Substack; this site mirrors it.** Both publications are pulled into `src/content/posts/` as full-text markdown:

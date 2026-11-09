@@ -96,8 +96,19 @@ interface ShareLink {
   linkTitle?: string;
 }
 
+interface NewsletterConfig {
+  /**
+   * Buttondown username. The signup form posts to Buttondown's embed endpoint
+   * for this account, and Buttondown's RSS-to-email automation watches
+   * /newsletters/rss.xml to draft an email per issue.
+   */
+  buttondownUsername: string;
+}
+
 interface AstroPaperConfig {
   site: SiteConfig;
+  /** Email subscriptions for the newsletter */
+  newsletter: NewsletterConfig;
   posts?: PostsConfig;
   features?: FeaturesConfig;
   /** Social profile links shown in header/footer */
@@ -125,6 +136,7 @@ type ResolvedSiteConfig = Required<
 
 export interface ResolvedAstroPaperConfig {
   site: ResolvedSiteConfig;
+  newsletter: NewsletterConfig;
   posts: Required<PostsConfig>;
   features: Required<FeaturesConfig>;
   socials: SocialLink[];

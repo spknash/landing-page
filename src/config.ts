@@ -23,6 +23,7 @@ const config: ResolvedAstroPaperConfig = {
       userConfig.site.googleVerification || PUBLIC_GOOGLE_SITE_VERIFICATION,
     mission: userConfig.site.mission ?? [],
   },
+  newsletter: userConfig.newsletter,
   posts: {
     perPage: userConfig.posts?.perPage ?? 4,
     perIndex: userConfig.posts?.perIndex ?? 4,

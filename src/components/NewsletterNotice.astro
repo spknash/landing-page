@@ -1,0 +1,56 @@
+---
+/**
+ * A short page on the newsletter paper for the two Buttondown redirects:
+ * "check your inbox" after signing up and "you're in" after confirming.
+ * Kept out of search engines; it is only ever reached from those redirects.
+ */
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Main from "@/components/Main.astro";
+import { getSortedNewsletters } from "@/utils/getSortedNewsletters";
+import config from "@/config";
+
+type Props = {
+  title: string;
+  description: string;
+  /** Show links to the latest issue and the archive. Defaults to true. */
+  links?: boolean;
+};
+
+const { title, description, links = true } = Astro.props;
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const latest = getSortedNewsletters(await getCollection("newsletters"))[0];
+---
+
+<Layout title={`${title} | ${config.site.title}`} description={description}>
+  <meta name="robots" content="noindex" slot="head" />
+  <Header />
+  <Main class="newsletter-page" pageTitle={title} pageDesc={description}>
+    <ul class="newsletter-next-steps">
+      {
+        links && latest && (
+          <li>
+            <a href={getRelativeLocaleUrl(locale, `newsletters/${latest.id}`)}>
+              Read the latest issue, No. {latest.data.issue}:{" "}
+              {latest.data.title}
+            </a>
+          </li>
+        )
+      }
+      {
+        links && (
+          <li>
+            <a href={getRelativeLocaleUrl(locale, "newsletters")}>
+              Browse every issue
+            </a>
+          </li>
+        )
+      }
+    </ul>
+  </Main>
+  <Footer />
+</Layout>

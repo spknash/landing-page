@@ -52,6 +52,11 @@ export default {
     newslettersTitle: "Newsletters",
     newslettersDesc: "What we got up to this week.",
     newslettersEmpty: "The first issue is on its way.",
+    newsletterSubscribedTitle: "Check your inbox",
+    newsletterSubscribedDesc:
+      "We sent you a confirmation link. Click it and you're on the list.",
+    newsletterConfirmedTitle: "Thank you for following along!",
+    newsletterConfirmedDesc: "Don't distribute on social media.",
 
     missionTitle: "Mission",
     missionDesc: "What we believe and the bet we're making now.",

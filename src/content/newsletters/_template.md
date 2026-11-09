@@ -1,6 +1,8 @@
 ---
 # Copy this file to `issue-NNN.md` (no leading underscore) to publish an issue.
 # Files starting with `_` are ignored by the content collection.
+# The filename is the issue's URL, and the URL is how Buttondown tells issues
+# apart: don't rename a published issue's file, or subscribers get it again.
 title: "Issue title"
 issue: 1
 pubDatetime: 2026-10-05T12:00:00-04:00

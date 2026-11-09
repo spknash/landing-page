@@ -19,6 +19,9 @@ export default defineAstroPaperConfig({
     timezone: "America/New_York",
     dir: "ltr",
   },
+  newsletter: {
+    buttondownUsername: "suhaas",
+  },
   posts: {
     perPage: 8,
     perIndex: 3,
