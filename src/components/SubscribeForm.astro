@@ -1,0 +1,89 @@
+---
+/**
+ * Email signup for the newsletter, backed by Buttondown. The form works
+ * without JavaScript (Buttondown redirects back to /newsletters/subscribed/);
+ * with it, the page stays put and the form swaps to a confirmation line.
+ *
+ * Subscribing is double opt-in: Buttondown emails a confirmation link, and
+ * nobody is on the list until they click it.
+ */
+import config from "@/config";
+
+type Props = {
+  /** Shown above the field. */
+  heading?: string;
+  class?: string;
+};
+
+const { heading = "Get each issue by email", class: className } = Astro.props;
+
+const action = `https://buttondown.com/api/emails/embed-subscribe/${config.newsletter.buttondownUsername}`;
+---
+
+<form
+  class:list={["subscribe-form", className]}
+  action={action}
+  method="post"
+  data-subscribe-form
+>
+  <p class="subscribe-form-heading">{heading}</p>
+  <div class="subscribe-form-row">
+    <label class="sr-only" for="subscribe-email">Email address</label>
+    <input
+      id="subscribe-email"
+      type="email"
+      name="email"
+      placeholder="you@example.com"
+      autocomplete="email"
+      required
+    />
+    <input type="hidden" name="embed" value="1" />
+    <button type="submit">Subscribe</button>
+  </div>
+  <p class="subscribe-form-note" data-subscribe-note>
+    One email per issue, nothing else. Unsubscribe any time.
+  </p>
+</form>
+
+<script>
+  function enhance(form: HTMLFormElement) {
+    if (form.dataset.enhanced) return;
+    form.dataset.enhanced = "true";
+    const note = form.querySelector<HTMLElement>("[data-subscribe-note]");
+    const button = form.querySelector<HTMLButtonElement>("button");
+    const email = form.querySelector<HTMLInputElement>("input[type=email]");
+
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+      if (!email || !button || !note) return form.submit();
+      button.disabled = true;
+      button.textContent = "Subscribing…";
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          redirect: "manual",
+        });
+        // Buttondown answers a successful signup with a redirect; anything
+        // else (a bad address, a blocked one) comes back as an error status.
+        if (res.type === "opaqueredirect" || res.ok) {
+          form.classList.add("is-done");
+          note.textContent = `Almost there. We sent a confirmation link to ${email.value}; click it and you're in.`;
+          return;
+        }
+        throw new Error(String(res.status));
+      } catch {
+        // Fall back to a plain submission so the signup still goes through.
+        form.submit();
+      }
+    });
+  }
+
+  function init() {
+    document
+      .querySelectorAll<HTMLFormElement>("[data-subscribe-form]")
+      .forEach(enhance);
+  }
+  init();
+  document.addEventListener("astro:page-load", init);
+</script>

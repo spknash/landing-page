@@ -5,6 +5,7 @@ import { Image, getImage } from "astro:assets";
 import PostLayout from "@/layouts/PostLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+import SubscribeForm from "@/components/SubscribeForm.astro";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
@@ -103,9 +104,11 @@ const t = useTranslations(locale);
       {!coauthor && <p class="signoff">— {author}</p>}
     </article>
 
+    <SubscribeForm class="mt-16" heading="Get the next issue by email" />
+
     <a
       href={getRelativeLocaleUrl(locale, "newsletters")}
-      class="text-muted-foreground hover:text-foreground mt-16 inline-block text-sm italic"
+      class="text-muted-foreground hover:text-foreground mt-12 inline-block text-sm italic"
     >
       ← All newsletters
     </a>

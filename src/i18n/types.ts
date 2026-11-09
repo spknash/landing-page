@@ -50,6 +50,10 @@ export interface UIStrings {
     newslettersTitle: string;
     newslettersDesc: string;
     newslettersEmpty: string;
+    newsletterSubscribedTitle: string;
+    newsletterSubscribedDesc: string;
+    newsletterConfirmedTitle: string;
+    newsletterConfirmedDesc: string;
 
     missionTitle: string;
     missionDesc: string;
