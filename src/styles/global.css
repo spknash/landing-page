@@ -288,6 +288,28 @@ html:has(.newsletter-page) {
     margin-block: 2.5em;
     border-color: var(--line);
   }
+
+  /* A plain table: hairlines between rows, no boxes. */
+  & table {
+    width: 100%;
+    margin-block: 1.5em;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  & th,
+  & td {
+    padding: 0.5em 0.75em 0.5em 0;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--line);
+  }
+
+  & th {
+    font-weight: 500;
+    font-style: italic;
+    color: var(--muted);
+  }
 }
 
 /* ===== Newsletter link cards ===== */
