@@ -46,7 +46,7 @@ AstroPaper provides routing, content collections, search, RSS, and sitemap. Its 
 ```
 
 - Nav: **Mission** + **Writings** + **Newsletters**. No product outlink.
-- Newsletter issues: `src/content/newsletters/` (copy `_template.md`; `issue` number orders the index).
+- Newsletter issues: `src/content/newsletters/` (copy `_template.md`; `issue` number orders the index). An issue with `draft: true` is hidden in production and out of the email feed, but renders in `npm run dev` and on Vercel preview deployments (`VERCEL_ENV=preview`), so a draft pushed to a branch can be read at its real URL before it goes live (`src/utils/getSortedNewsletters.ts`).
 
 - Posts: `src/content/posts/` (collection still named `posts` internally; public URLs are `/writings/...`).
 - Post URL generation: `src/utils/getPostPaths.ts`.

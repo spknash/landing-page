@@ -18,6 +18,8 @@ heroAlt: "What the headline image shows"
 # Optional credit line under the headline image.
 # heroCredit: "Photographer or source"
 # heroCreditUrl: "https://..."
+# While true, the issue is hidden on the live site and left out of the email
+# feed, but still renders in `npm run dev` and on Vercel preview deployments.
 draft: true
 ---
 

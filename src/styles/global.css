@@ -288,6 +288,66 @@ html:has(.newsletter-page) {
     margin-block: 2.5em;
     border-color: var(--line);
   }
+
+  /* A collapsed section, e.g. a long table the reader can open. */
+  & details {
+    margin-block: 1.5em;
+  }
+
+  & summary {
+    cursor: pointer;
+    font-style: italic;
+    color: var(--muted);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  & summary::-webkit-details-marker {
+    display: none;
+  }
+
+  & summary::before {
+    content: "";
+    flex: none;
+    width: 0.4em;
+    height: 0.4em;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    transform: rotate(-45deg);
+    transition: transform 0.15s;
+  }
+
+  & details[open] > summary::before {
+    transform: rotate(45deg);
+  }
+
+  & summary:hover {
+    color: var(--ink);
+  }
+
+  /* A plain table: hairlines between rows, no boxes. */
+  & table {
+    width: 100%;
+    margin-block: 1.5em;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  & th,
+  & td {
+    padding: 0.5em 0.75em 0.5em 0;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--line);
+  }
+
+  & th {
+    font-weight: 500;
+    font-style: italic;
+    color: var(--muted);
+  }
 }
 
 /* ===== Newsletter link cards ===== */
